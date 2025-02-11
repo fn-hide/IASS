@@ -230,13 +230,17 @@ wheels = [
 name = "iass"
 version = "0.1.0"
 source = { virtual = "." }
-dependencies = [
+
+[package.dev-dependencies]
+dev = [
     { name = "opencv-python" },
     { name = "ultralytics" },
 ]
 
 [package.metadata]
-requires-dist = [
+
+[package.metadata.requires-dev]
+dev = [
     { name = "opencv-python", specifier = ">=4.11.0.86" },
     { name = "ultralytics", specifier = ">=8.3.74" },
 ]
