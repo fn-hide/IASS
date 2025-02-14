@@ -12,3 +12,6 @@ wheels/
 # media
 *.avi
 *.mp4
+
+# model
+*.pt
