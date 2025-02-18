@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "onnxruntime>=1.20.1",
     "shapely>=2.0.7",
     "ultralytics>=8.3.74",
 ]
@@ -12,6 +13,8 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ipykernel>=6.29.5",
+    "onnx>=1.17.0",
+    "onnxslim>=0.1.48",
     "opencv-python>=4.11.0.86",
     "pre-commit>=4.1.0",
 ]
