@@ -16,3 +16,6 @@ wheels/
 # model
 *.pt
 *.onnx
+
+# dataset
+dataset/
