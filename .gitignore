@@ -12,6 +12,7 @@ wheels/
 # media
 *.avi
 *.mp4
+*.zip
 
 # model
 *.pt
@@ -19,3 +20,4 @@ wheels/
 
 # dataset
 dataset/
+task_*/
