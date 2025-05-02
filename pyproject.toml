@@ -20,6 +20,7 @@ dev = [
     "opencv-python>=4.11.0.86",
     "openvino>=2025.0.0",
     "pre-commit>=4.1.0",
+    "scikit-learn>=1.6.1",
     "shapely>=2.0.7",
     "torch>=2.6.0",
     "ultralytics>=8.3.74",
