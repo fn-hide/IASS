@@ -22,3 +22,6 @@ models/
 # dataset
 dataset/
 task_*/
+
+# result
+result/
