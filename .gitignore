@@ -19,9 +19,5 @@ wheels/
 *.onnx
 models/
 
-# dataset
-dataset/
-task_*/
-
-# result
-result/
+# asset
+asset/*/
