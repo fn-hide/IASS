@@ -26,26 +26,33 @@ logout = st.Page(
 )
 
 # entrypoint
-if st.session_state.get("authentication_status", None):
-    if "developer" in st.session_state["roles"]:
-        pg = st.navigation(
-            {
-                "Home": [welcome, logout],
-            }
-        )
-    elif "spectator" in st.session_state["roles"]:
-        pg = st.navigation(
-            {
-                "Home": [welcome, logout],
-            }
-        )
-    else:
-        pg = st.navigation(
-            {
-                "Home": [welcome, logout],
-            }
-        )
+if Config.MODE == "dev":
+    pg = st.navigation(
+        {
+            "Home": [welcome, logout],
+        }
+    )
 else:
-    pg = st.navigation([login])
+    if st.session_state.get("authentication_status", None):
+        if "developer" in st.session_state["roles"]:
+            pg = st.navigation(
+                {
+                    "Home": [welcome, logout],
+                }
+            )
+        elif "spectator" in st.session_state["roles"]:
+            pg = st.navigation(
+                {
+                    "Home": [welcome, logout],
+                }
+            )
+        else:
+            pg = st.navigation(
+                {
+                    "Home": [welcome, logout],
+                }
+            )
+    else:
+        pg = st.navigation([login])
 
 pg.run()

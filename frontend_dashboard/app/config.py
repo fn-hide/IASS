@@ -2,6 +2,7 @@ import os
 
 
 class Config(object):
+    MODE = "dev"
     BASE_DIR = os.path.abspath(os.path.dirname(__file__))
     SECRET_KEY = os.getenv("SECRET_KEY") or "plVdTwE0roGrrdXMBzWv9SSguvg6YDJp"
     PATH_CONFIG_YAML = os.path.join(BASE_DIR, "config.yaml")
