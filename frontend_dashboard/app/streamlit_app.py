@@ -14,6 +14,11 @@ welcome = st.Page(
     icon=":material/home:",
     default=True,
 )
+crop = st.Page(
+    Config.PATH_CROP,
+    title="Crop",
+    icon=":material/draw:",
+)
 login = st.Page(
     Config.PATH_LOGIN,
     title="Login",
@@ -29,7 +34,7 @@ logout = st.Page(
 if Config.MODE == "dev":
     pg = st.navigation(
         {
-            "Home": [welcome, logout],
+            "Home": [welcome, crop, logout],
         }
     )
 else:
