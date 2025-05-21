@@ -1,0 +1,39 @@
+cookie:
+  expiry_days: 30
+  key: uvuvewe_uvuvevwevwe_ugwemubwem_ozas        # Must be a string
+  name: ozas_ugwemubwem_uvuvevwevwe_uvuvewe
+credentials:
+  usernames:
+    developer:
+      email: developer@gmail.com
+      failed_login_attempts: 0                    # Will be managed automatically
+      first_name: Developer
+      last_name: Developer
+      logged_in: False                            # Will be managed automatically
+      password: changethis                            # Will be hashed automatically
+      roles:                                      # Optional
+      - developer
+      - spectator
+      - client
+    spectator:
+      email: spectator@gmail.com
+      failed_login_attempts: 0                    # Will be managed automatically
+      first_name: Spectator
+      last_name: Spectator
+      logged_in: False                            # Will be managed automatically
+      password: changethis                            # Will be hashed automatically
+      roles:                                      # Optional
+      - spectator
+oauth2:                                           # Optional
+  google:                                         # Follow instructions: https://developers.google.com/identity/protocols/oauth2
+    client_id:                                    # To be filled
+    client_secret:                                # To be filled
+    redirect_uri:                                 # URL to redirect to after OAuth2 authentication
+  microsoft:                                      # Follow instructions: https://learn.microsoft.com/en-us/graph/auth-register-app-v2
+    client_id:                                    # To be filled
+    client_secret:                                # To be filled
+    redirect_uri:                                 # URL to redirect to after OAuth2 authentication
+    tenant_id:                                    # To be filled
+pre-authorized:                                   # Optional
+  emails:
+  - febriantohuda@gmail.com
