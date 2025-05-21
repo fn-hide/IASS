@@ -3,7 +3,7 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Welcome",
-    page_icon=":material/login:",
+    page_icon=":material/waving_hand:",
     layout="wide",
     initial_sidebar_state="expanded",
 )
