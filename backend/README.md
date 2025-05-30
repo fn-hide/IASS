@@ -2,6 +2,9 @@
 
 ## TODO
 
+- [x] 🍻 Copy and paste from IASSEdge backend
+- [x] 🔧 Update default hub url
+
 ## Requirements
 
 * [Docker](https://www.docker.com/).
