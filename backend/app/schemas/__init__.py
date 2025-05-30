@@ -10,7 +10,6 @@ from .item import (
     ItemCreate,
     ItemPublic,
     ItemsPublic,
-    ItemUpdate,
 )
 from .site import (
     SiteBase,
@@ -43,7 +42,6 @@ __all__ = [
     "NewPassword",
     "ItemBase",
     "ItemCreate",
-    "ItemUpdate",
     "ItemPublic",
     "ItemsPublic",
     "SiteBase",

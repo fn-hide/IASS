@@ -4,7 +4,7 @@ from fastapi import HTTPException
 
 from app.models import Item, Message
 from app.repositories import RItem
-from app.schemas import ItemCreate, ItemsPublic, ItemUpdate
+from app.schemas import ItemCreate, ItemsPublic
 
 
 class SItem:
@@ -25,11 +25,6 @@ class SItem:
     def create_item(self, item_in: ItemCreate, user_id: uuid.UUID) -> Item:
         obj = Item.model_validate(item_in, update={"owner_id": user_id})
         return self.repository.create(obj)
-
-    def update_item(self, id: uuid.UUID, item_in: ItemUpdate) -> Item:
-        item_obj = self.read_item(id=id)
-        update_dict = item_in.model_dump(exclude_unset=True)
-        return self.repository.update(obj=item_obj, data=update_dict)
 
     def delete_item(self, id: uuid.UUID) -> Message:
         item_obj = self.read_item(id=id)

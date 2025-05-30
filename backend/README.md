@@ -4,6 +4,7 @@
 
 - [x] 🍻 Copy and paste from IASSEdge backend
 - [x] 🔧 Update default hub url
+- [x] 🗃️ Make item table to store a vehicle counting object
 
 ## Requirements
 

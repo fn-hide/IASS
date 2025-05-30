@@ -10,7 +10,6 @@ from app.schemas import (
     ItemCreate,
     ItemPublic,
     ItemsPublic,
-    ItemUpdate,
 )
 from app.services import SItem
 
@@ -60,21 +59,6 @@ def create_item(
     repository = RItem(session=session)
     service = SItem(repository=repository)
     return service.create_item(item_in=item_in, user_id=current_user.id)
-
-
-@router.put(
-    "/{id}",
-    dependencies=[Depends(get_current_active_superuser)],
-    response_model=ItemPublic,
-)
-def update_item(*, session: SessionDep, id: uuid.UUID, item_in: ItemUpdate) -> Any:
-    """
-    Update an item.
-    """
-
-    repository = RItem(session=session)
-    service = SItem(repository=repository)
-    return service.update_item(id=id, item_in=item_in)
 
 
 @router.delete("/{id}", dependencies=[Depends(get_current_active_superuser)])
