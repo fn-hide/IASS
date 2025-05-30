@@ -4,7 +4,7 @@ from datetime import datetime
 from sqlmodel import Field
 
 from app.models.base import BaseModel
-from app.utils import utcnow
+from .utils import utcnow
 
 
 # Shared properties
