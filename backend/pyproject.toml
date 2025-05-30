@@ -21,6 +21,7 @@ dependencies = [
     "pydantic-settings<3.0.0,>=2.2.1",
     "sentry-sdk[fastapi]<2.0.0,>=1.40.6",
     "pyjwt<3.0.0,>=2.8.0",
+    "fastapi-utils[all]>=0.8.0",
 ]
 
 [tool.uv]
@@ -28,7 +29,7 @@ dev-dependencies = [
     "pytest<8.0.0,>=7.4.3",
     "mypy<2.0.0,>=1.8.0",
     "ruff<1.0.0,>=0.2.2",
-    "pre-commit<4.0.0,>=3.6.2",
+    "pre-commit>=3.6.2,<4.0.0",
     "types-passlib<2.0.0.0,>=1.7.7.20240106",
     "coverage<8.0.0,>=7.4.3",
 ]

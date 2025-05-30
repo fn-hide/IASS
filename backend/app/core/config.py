@@ -94,6 +94,12 @@ class Settings(BaseSettings):
     EMAIL_TEST_USER: EmailStr = "test@example.com"
     FIRST_SUPERUSER: EmailStr
     FIRST_SUPERUSER_PASSWORD: str
+    DEFAULT_HUB_NAME: str
+    DEFAULT_HUB_ADDRESS: str
+    DEFAULT_HUB_LATITUDE: float
+    DEFAULT_HUB_LONGITUDE: float
+    DEFAULT_HUB_URL: str
+    DEFAULT_HUB_PING_INTERVAL: int
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":

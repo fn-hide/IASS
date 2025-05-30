@@ -2,7 +2,10 @@ from sqlmodel import Session, create_engine, select
 
 from app import crud
 from app.core.config import settings
-from app.models import User, UserCreate
+from app.models import Hub, User
+from app.repositories import RHub
+from app.schemas import HubCreate, UserCreate
+from app.services import SHub
 
 engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
@@ -15,7 +18,7 @@ engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 def init_db(session: Session) -> None:
     # Tables should be created with Alembic migrations
     # But if you don't want to use migrations, create
-    # the tables un-commenting the next lines
+    # the tables uncommenting the next lines
     # from sqlmodel import SQLModel
 
     # This works because the models are already imported and registered from app.models
@@ -31,3 +34,17 @@ def init_db(session: Session) -> None:
             is_superuser=True,
         )
         user = crud.create_user(session=session, user_create=user_in)
+
+    hub = session.exec(select(Hub).where(Hub.name == settings.DEFAULT_HUB_NAME)).first()
+    if not hub:
+        hub_in = HubCreate(
+            name=settings.DEFAULT_HUB_NAME,
+            address=settings.DEFAULT_HUB_ADDRESS,
+            latitude=settings.DEFAULT_HUB_LATITUDE,
+            longitude=settings.DEFAULT_HUB_LONGITUDE,
+            url=settings.DEFAULT_HUB_URL,
+            ping_hub_interval=settings.DEFAULT_HUB_PING_INTERVAL,
+        )
+        repository = RHub(session)
+        service = SHub(repository)
+        service.create_hub(hub_in=hub_in, user_id=user.id)
