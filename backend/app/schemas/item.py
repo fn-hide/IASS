@@ -13,6 +13,7 @@ class ItemBase(BaseModel):
     date_stamped: datetime
     entity_index: int
     is_in: bool
+    is_up: bool
 
 
 class ItemCreate(ItemBase):
