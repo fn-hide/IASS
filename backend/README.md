@@ -2,8 +2,6 @@
 
 ## TODO
 
-- [x] ✨ Add a pong api to receive ping from edge site
-
 ## Requirements
 
 * [Docker](https://www.docker.com/).
