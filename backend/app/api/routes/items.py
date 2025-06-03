@@ -46,9 +46,7 @@ def read_item(session: SessionDep, id: uuid.UUID) -> Any:
     return service.read_item(id=id)
 
 
-@router.post(
-    "/", dependencies=[Depends(get_current_active_superuser)], response_model=ItemPublic
-)
+@router.post("/", response_model=ItemPublic)
 def create_item(
     *, session: SessionDep, current_user: CurrentUser, item_in: ItemCreate
 ) -> Any:

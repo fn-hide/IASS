@@ -11,6 +11,12 @@
 - [x] ✨ Add connect timeout exception handler
 - [x] 💡 Comment background task (only for edge backend)
 - [x] ✨ Add an api to send item into hub
+- [x] 🛂 Change item:create permission for all users
+- [ ] 🛂 Add scalable permission
+- [ ] 🗃️ Split `url` column into `host` and `port` columns
+- [ ] ♻️ Move `insert_item` logic into `utils` module
+- [ ] 👷 Create different .env for each edge backend (exclude from git)
+- [ ] 👷 Update each edge backend automatically by pull-build only (in maintenance mode)
 
 ## Requirements
 
