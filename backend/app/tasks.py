@@ -6,17 +6,27 @@ from app.main import app
 from app.repositories.r_item import RItem
 from app.schemas import ItemCreate
 from app.services.s_item import SItem
-from app.utils import is_hub_up
+from app.utils import is_hub_up, send_item
+
+
+@app.on_event("startup")
+async def register_edge_user():
+    if await is_hub_up():
+        return await send_item()
+    return None
 
 
 @app.on_event("startup")
 @repeat_every(seconds=1)
 async def ping_hub():
-    return await is_hub_up()
+    if await is_hub_up():
+        return await send_item()
+    return None
 
 
-@app.on_event("startup")
-@repeat_every(seconds=1)
+# -- development only --
+# @app.on_event("startup")
+# @repeat_every(seconds=1)
 async def insert_item():
     from app.repositories.r_user import RUser
     from app.services.s_user import SUser

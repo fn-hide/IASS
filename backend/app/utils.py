@@ -14,7 +14,7 @@ from sqlmodel import Session, create_engine, select
 
 from app.core import security
 from app.core.config import settings
-from app.models import Hub
+from app.models import Hub, Item
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -168,3 +168,60 @@ async def is_hub_up() -> bool:
     except Exception as e:
         logger.info(f"❌ Hub request failed with global exception: {str(e)}")
         return False
+
+
+async def send_item() -> None:
+    engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
+    with Session(engine) as session:
+        stmt = select(Hub).limit(1)
+        hub = session.exec(stmt).first()
+        if not hub:
+            logger.info("✖️ Hub not found")
+            return None
+        stmt = select(Item).filter_by(is_up=False).limit(10)
+        items = session.exec(stmt).all()
+        if not items:
+            logger.info("✅ Item is up-to-date. No need to send to hub.")
+            return None
+        async with httpx.AsyncClient() as client:
+            url = "http://192.168.50.240:8000/api/v1/login/access-token"
+            headers = {"Content-Type": "application/x-www-form-urlencoded"}
+            data = {
+                "username": "admin@example.com",
+                "password": "changethis",
+            }
+            response = await client.post(url, data=data, headers=headers)
+            if response.status_code != 200:
+                logger.error("🚨 Token invalid!")
+                return None
+            token = response.json().get("access_token")
+            headers = {
+                "accept": "application/json",
+                "Authorization": f"Bearer {token}",
+            }
+            for item in items:
+                data = {
+                    "date_created": str(item.date_created),
+                    "date_stamped": str(item.date_stamped),
+                    "entity_index": item.entity_index,
+                    "is_in": item.is_in,
+                    "is_up": True,
+                }
+                try:
+                    response = await client.post(
+                        "http://192.168.50.240:8000/api/v1/items/",
+                        headers=headers,
+                        json=data,
+                    )
+                    if response.status_code == 200:
+                        item.is_up = True
+                        session.add(item)
+                        logger.info("✔️ Sent item to hub")
+                    else:
+                        logger.warning(
+                            f"❗ Failed to send item to hub: {response.status_code}"
+                        )
+                except Exception as e:
+                    logger.error(f"❌ Exception while sending item to hub: {e}")
+            session.commit()
+            return None

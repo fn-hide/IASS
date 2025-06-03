@@ -10,6 +10,7 @@
 - [x] 🐛 Fix can't insert into a database by replacing SessionDep with general session
 - [x] ✨ Add connect timeout exception handler
 - [x] 💡 Comment background task (only for edge backend)
+- [x] ✨ Add an api to send item into hub
 
 ## Requirements
 
