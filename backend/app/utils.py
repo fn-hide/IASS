@@ -187,8 +187,8 @@ async def send_item() -> None:
             url = "http://192.168.50.240:8000/api/v1/login/access-token"
             headers = {"Content-Type": "application/x-www-form-urlencoded"}
             data = {
-                "username": "admin@example.com",
-                "password": "changethis",
+                "username": settings.FIRST_SUPERUSER,
+                "password": settings.FIRST_SUPERUSER_PASSWORD,
             }
             response = await client.post(url, data=data, headers=headers)
             if response.status_code != 200:
@@ -225,3 +225,19 @@ async def send_item() -> None:
                     logger.error(f"❌ Exception while sending item to hub: {e}")
             session.commit()
             return None
+
+
+async def create_edge_user() -> None:
+    async with httpx.AsyncClient() as client:
+        url = "http://192.168.50.240:8000/api/v1/users/signup"
+        headers = {"accept": "application/json", "Content-Type": "application/json"}
+        data = {
+            "email": settings.FIRST_SUPERUSER,
+            "password": settings.FIRST_SUPERUSER_PASSWORD,
+            "full_name": "edge",
+        }
+        response = await client.post(url, headers=headers, json=data)
+        if response.status_code != 200:
+            logger.error("🚨 Failed to register a new edge user!")
+        logger.error("🎉 Successfully registered a new edge user.")
+        return None

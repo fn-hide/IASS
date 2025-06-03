@@ -12,6 +12,7 @@
 - [x] 💡 Comment background task (only for edge backend)
 - [x] ✨ Add an api to send item into hub
 - [x] 🛂 Change item:create permission for all users
+- [x] ✨ Add a background task to create edge user
 - [ ] 🛂 Add scalable permission
 - [ ] 🗃️ Split `url` column into `host` and `port` columns
 - [ ] ♻️ Move `insert_item` logic into `utils` module
