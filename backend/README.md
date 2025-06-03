@@ -6,6 +6,7 @@
 - [x] 🔧 Update default hub url
 - [x] 🗃️ Make item table to store a vehicle counting object
 - [x] 🔧 Add pycharm configuration
+- [x] 🗃️ Re-generate migration files with order prefix
 
 ## Requirements
 
