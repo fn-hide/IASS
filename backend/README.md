@@ -9,6 +9,7 @@
 - [x] 🗃️ Re-generate migration files with order prefix
 - [x] 🐛 Fix can't insert into a database by replacing SessionDep with general session
 - [x] ✨ Add connect timeout exception handler
+- [x] 💡 Comment background task (only for edge backend)
 
 ## Requirements
 
