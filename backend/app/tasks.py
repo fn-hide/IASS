@@ -1,11 +1,12 @@
 from fastapi_utils.tasks import repeat_every
+from sqlmodel import Session, create_engine
 
+from app.core.config import settings
 from app.main import app
-from app.utils import is_hub_up
-from app.api.deps import SessionDep
 from app.repositories.r_item import RItem
-from app.services.s_item import SItem
 from app.schemas import ItemCreate
+from app.services.s_item import SItem
+from app.utils import is_hub_up
 
 
 @app.on_event("startup")
@@ -17,21 +18,23 @@ async def ping_hub():
 @app.on_event("startup")
 @repeat_every(seconds=1)
 async def insert_item():
-    from app.utils import utcnow
     from app.repositories.r_user import RUser
     from app.services.s_user import SUser
+    from app.utils import utcnow
 
-    repository = RUser(SessionDep)
-    service = SUser(repository)
-    user = service.read_users(skip=0, limit=1)
+    engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
+    with Session(engine) as session:
+        repository = RUser(session)
+        service = SUser(repository)
+        user = service.read_users(skip=0, limit=1)
 
-    repository = RItem(SessionDep)
-    service = SItem(repository)
-    # NOTE: Generate fake data on edge device
-    item = ItemCreate(
-        date_stamped=utcnow(),
-        entity_index=1,
-        is_in=True,
-        is_up=False,
-    )
-    return await service.create_item(item, user.data[0].id)
+        repository = RItem(session)
+        service = SItem(repository)
+        # NOTE: Generate fake data on edge device
+        item = ItemCreate(
+            date_stamped=utcnow(),
+            entity_index=1,
+            is_in=True,
+            is_up=False,
+        )
+        return await service.create_item(item, user.data[0].id)

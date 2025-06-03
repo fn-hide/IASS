@@ -7,6 +7,7 @@
 - [x] 🗃️ Make item table to store a vehicle counting object
 - [x] 🔧 Add pycharm configuration
 - [x] 🗃️ Re-generate migration files with order prefix
+- [x] 🐛 Fix can't insert into a database by replacing SessionDep with general session
 
 ## Requirements
 
