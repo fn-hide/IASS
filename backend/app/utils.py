@@ -162,6 +162,9 @@ async def is_hub_up() -> bool:
     except httpx.ReadTimeout:
         logger.info("❌ Hub request failed: ReadTimeout")
         return False
+    except httpx.ConnectTimeout:
+        logger.info("❌ Hub request failed: ConnectTimeout")
+        return False
     except Exception as e:
         logger.info(f"❌ Hub request failed with global exception: {str(e)}")
         return False
