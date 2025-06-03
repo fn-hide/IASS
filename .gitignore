@@ -21,10 +21,5 @@ wheels/
 *.mp4
 *.zip
 
-# model
-*.pt
-*.onnx
-models/
-
 # asset
 asset/*/
