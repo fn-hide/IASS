@@ -13,11 +13,12 @@
 - [x] ✨ Add an api to send item into hub
 - [x] 🛂 Change item:create permission for all users
 - [x] ✨ Add a background task to create edge user
-- [ ] 🛂 Add scalable permission
-- [ ] 🗃️ Split `url` column into `host` and `port` columns
+- [ ] 🛂 Add scalable permission between edge and hub
+- [x] 🗃️ Split `url` column into `host` and `port` columns
+- [x] 🗃️ Add a `limit_send` limit to send into hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
-- [ ] 👷 Create different .env for each edge backend (exclude from git)
-- [ ] 👷 Update each edge backend automatically by pull-build only (in maintenance mode)
+- [ ] 👷 Create different .env for each-edge backend (excluded from git)
+- [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
 
 ## Requirements
 

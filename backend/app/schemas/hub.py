@@ -11,8 +11,10 @@ class HubBase(BaseModel):
     address: str = Field(min_length=1, max_length=255)
     latitude: float
     longitude: float
-    url: str
+    host: str
+    port: str
     ping_hub_interval: int = Field(ge=1, le=60 * 60 * 24)
+    limit_send: int = Field(ge=1, le=10000)
 
 
 # Properties to receive on item creation
@@ -26,8 +28,10 @@ class HubUpdate(HubBase):
     address: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
     latitude: float | None  # type: ignore
     longitude: float | None  # type: ignore
-    url: str | None  # type: ignore
+    host: str | None  # type: ignore
+    port: str | None  # type: ignore
     ping_hub_interval: int | None  # type: ignore
+    limit_send: int | None  # type: ignore
 
 
 # Properties to return via API, id is always required

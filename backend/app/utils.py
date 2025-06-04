@@ -151,22 +151,20 @@ async def is_hub_up() -> bool:
     if not hub:
         logger.info("✖️ Hub not found")
         return False
-    try:
-        async with httpx.AsyncClient(timeout=1) as client:
-            response = await client.get(str(hub.url))
+    async with httpx.AsyncClient(timeout=1) as client:
+        try:
+            url = f"http://{hub.host}:{hub.port}/api/v1/utils/health-check/"
+            response = await client.get(url)
             if response.status_code == 200:
                 logger.info(f"⬆️ Hub is up: {response.status_code}")
                 return True
             logger.info(f"⬇️ Hub is down: {response.status_code}")
-            return False
-    except httpx.ReadTimeout:
-        logger.info("❌ Hub request failed: ReadTimeout")
-        return False
-    except httpx.ConnectTimeout:
-        logger.info("❌ Hub request failed: ConnectTimeout")
-        return False
-    except Exception as e:
-        logger.info(f"❌ Hub request failed with global exception: {str(e)}")
+        except httpx.ReadTimeout:
+            logger.info("❌ Hub request failed: ReadTimeout")
+        except httpx.ConnectTimeout:
+            logger.info("❌ Hub request failed: ConnectTimeout")
+        except Exception as e:
+            logger.info(f"❌ Hub request failed with global exception: {str(e)}")
         return False
 
 
@@ -184,7 +182,7 @@ async def send_item() -> None:
             logger.info("✅ Item is up-to-date. No need to send to hub.")
             return None
         async with httpx.AsyncClient() as client:
-            url = "http://192.168.50.240:8000/api/v1/login/access-token"
+            url = f"http://{hub.host}:{hub.port}/api/v1/login/access-token"
             headers = {"Content-Type": "application/x-www-form-urlencoded"}
             data = {
                 "username": settings.FIRST_SUPERUSER,
@@ -209,7 +207,7 @@ async def send_item() -> None:
                 }
                 try:
                     response = await client.post(
-                        "http://192.168.50.240:8000/api/v1/items/",
+                        f"http://{hub.host}:{hub.port}/api/v1/items/",
                         headers=headers,
                         json=data,
                     )
@@ -228,8 +226,15 @@ async def send_item() -> None:
 
 
 async def create_edge_user() -> None:
+    engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
+    with Session(engine) as session:
+        stmt = select(Hub).limit(1)
+        hub = session.exec(stmt).first()
+        if not hub:
+            logger.info("✖️ Hub not found")
+            return None
     async with httpx.AsyncClient() as client:
-        url = "http://192.168.50.240:8000/api/v1/users/signup"
+        url = f"http://{hub.host}:{hub.port}/api/v1/users/signup"
         headers = {"accept": "application/json", "Content-Type": "application/json"}
         data = {
             "email": settings.FIRST_SUPERUSER,
