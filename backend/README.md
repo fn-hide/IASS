@@ -22,6 +22,8 @@
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
+- [ ] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
+- [x] 📄 Add MIT license
 
 ## Requirements
 

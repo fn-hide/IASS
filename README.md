@@ -75,3 +75,7 @@ Currently, there is only **one Super Hub** in the system. Future versions may su
 ## Release Notes
 
 Go to the [Release Notes](./release-notes.md).
+
+## License
+
+The IASS project is licensed under the terms of the MIT license.
