@@ -16,6 +16,7 @@
 - [ ] 🛂 Add scalable permission between edge and hub
 - [x] 🗃️ Split `url` column into `host` and `port` columns
 - [x] 🗃️ Add a `limit_send` limit to send into hub
+- [x] ✏️ Resolve port typo
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
