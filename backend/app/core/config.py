@@ -100,7 +100,7 @@ class Settings(BaseSettings):
     DEFAULT_HUB_LONGITUDE: float
     DEFAULT_HUB_HOST: str
     DEFAULT_HUB_PORT: str
-    DEFAULT_HUB_PING_INTERVAL: int
+    DEFAULT_HUB_INTERVAL_PING: int
     DEFAULT_HUB_LIMIT_SEND: int
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:

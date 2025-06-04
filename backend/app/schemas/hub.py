@@ -13,7 +13,7 @@ class HubBase(BaseModel):
     longitude: float
     host: str
     port: str
-    ping_hub_interval: int = Field(ge=1, le=60 * 60 * 24)
+    interval_ping: int = Field(ge=1, le=60 * 60 * 24)
     limit_send: int = Field(ge=1, le=10000)
 
 
@@ -30,7 +30,7 @@ class HubUpdate(HubBase):
     longitude: float | None  # type: ignore
     host: str | None  # type: ignore
     port: str | None  # type: ignore
-    ping_hub_interval: int | None  # type: ignore
+    interval_ping: int | None  # type: ignore
     limit_send: int | None  # type: ignore
 
 

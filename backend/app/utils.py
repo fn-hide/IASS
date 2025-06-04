@@ -133,14 +133,14 @@ def utcnow() -> datetime:
     return datetime.now(timezone.utc)
 
 
-def get_ping_hub_interval() -> int:
+def get_interval_ping() -> int:
     engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
     with Session(engine) as session:
         stmt = select(Hub).limit(1)
         hub = session.exec(stmt).first()
         if not hub:
             return 1
-        return hub.ping_hub_interval
+        return hub.interval_ping
 
 
 async def is_hub_up() -> bool:

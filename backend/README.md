@@ -16,6 +16,8 @@
 - [ ] 🛂 Add scalable permission between edge and hub
 - [x] 🗃️ Split `url` column into `host` and `port` columns
 - [x] 🗃️ Add a `limit_send` limit to send into hub
+- [x] 🚚 Rename `ping_hub_interval` into `interval_ping`
+- [x] 🚚 Rename `DEFAULT_HUB_PING_INTERVAL` into `DEFAULT_HUB_INTERVAL_PING`
 - [x] ✏️ Resolve port typo
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
