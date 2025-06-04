@@ -24,6 +24,7 @@
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
 - [ ] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
 - [x] 📄 Add MIT license
+- [x] ⚗️ Add streaming only
 
 ## Requirements
 
