@@ -56,7 +56,7 @@ const EditUser = ({ user }: EditUserProps) => {
 
   const mutation = useMutation({
     mutationFn: (data: UserUpdateForm) =>
-      UsersService.updateUser({ userId: user.id, requestBody: data }),
+      UsersService.updateUser({ id: user.id, requestBody: data }),
     onSuccess: () => {
       showSuccessToast("User updated successfully.")
       reset()

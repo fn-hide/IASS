@@ -12,8 +12,6 @@ import { FiSearch } from "react-icons/fi"
 import { z } from "zod"
 
 import { ItemsService } from "@/client"
-import { ItemActionsMenu } from "@/components/Common/ItemActionsMenu"
-import AddItem from "@/components/Items/AddItem"
 import PendingItems from "@/components/Pending/PendingItems"
 import {
   PaginationItems,
@@ -86,9 +84,11 @@ function ItemsTable() {
         <Table.Header>
           <Table.Row>
             <Table.ColumnHeader w="sm">ID</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Title</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Description</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Actions</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Date Created</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Date Stamped</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">ID of Entity</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Is In?</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Is Up?</Table.ColumnHeader>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -98,17 +98,19 @@ function ItemsTable() {
                 {item.id}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {item.title}
+                {item.date_created}
               </Table.Cell>
-              <Table.Cell
-                color={!item.description ? "gray" : "inherit"}
-                truncate
-                maxW="30%"
-              >
-                {item.description || "N/A"}
+              <Table.Cell truncate maxW="sm">
+                {item.date_stamped}
               </Table.Cell>
-              <Table.Cell>
-                <ItemActionsMenu item={item} />
+              <Table.Cell truncate maxW="sm">
+                {item.entity_index}
+              </Table.Cell>
+              <Table.Cell truncate maxW="sm">
+                {item.is_in ? 'Yes' : 'No'}
+              </Table.Cell>
+              <Table.Cell truncate maxW="sm">
+                {item.is_in ? 'Yes' : 'No'}
               </Table.Cell>
             </Table.Row>
           ))}
@@ -137,7 +139,6 @@ function Items() {
       <Heading size="lg" pt={12}>
         Items Management
       </Heading>
-      <AddItem />
       <ItemsTable />
     </Container>
   )
