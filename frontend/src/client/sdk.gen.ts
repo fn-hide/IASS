@@ -10,8 +10,6 @@ import type {
   ItemsCreateItemResponse,
   ItemsReadItemData,
   ItemsReadItemResponse,
-  ItemsUpdateItemData,
-  ItemsUpdateItemResponse,
   ItemsDeleteItemData,
   ItemsDeleteItemResponse,
   LoginLoginAccessTokenData,
@@ -25,6 +23,16 @@ import type {
   LoginRecoverPasswordHtmlContentResponse,
   PrivateCreateUserData,
   PrivateCreateUserResponse,
+  SitesReadSitesData,
+  SitesReadSitesResponse,
+  SitesCreateSiteData,
+  SitesCreateSiteResponse,
+  SitesReadSiteData,
+  SitesReadSiteResponse,
+  SitesUpdateSiteData,
+  SitesUpdateSiteResponse,
+  SitesDeleteSiteData,
+  SitesDeleteSiteResponse,
   UsersReadUsersData,
   UsersReadUsersResponse,
   UsersCreateUserData,
@@ -76,7 +84,7 @@ export class ItemsService {
 
   /**
    * Create Item
-   * Create new item.
+   * Create a new item.
    * @param data The data for the request.
    * @param data.requestBody
    * @returns ItemPublic Successful Response
@@ -113,32 +121,6 @@ export class ItemsService {
       path: {
         id: data.id,
       },
-      errors: {
-        422: "Validation Error",
-      },
-    })
-  }
-
-  /**
-   * Update Item
-   * Update an item.
-   * @param data The data for the request.
-   * @param data.id
-   * @param data.requestBody
-   * @returns ItemPublic Successful Response
-   * @throws ApiError
-   */
-  public static updateItem(
-    data: ItemsUpdateItemData,
-  ): CancelablePromise<ItemsUpdateItemResponse> {
-    return __request(OpenAPI, {
-      method: "PUT",
-      url: "/api/v1/items/{id}",
-      path: {
-        id: data.id,
-      },
-      body: data.requestBody,
-      mediaType: "application/json",
       errors: {
         422: "Validation Error",
       },
@@ -298,6 +280,127 @@ export class PrivateService {
   }
 }
 
+export class SitesService {
+  /**
+   * Read Sites
+   * Retrieve sites.
+   * @param data The data for the request.
+   * @param data.skip
+   * @param data.limit
+   * @returns SitesPublic Successful Response
+   * @throws ApiError
+   */
+  public static readSites(
+    data: SitesReadSitesData = {},
+  ): CancelablePromise<SitesReadSitesResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/sites/",
+      query: {
+        skip: data.skip,
+        limit: data.limit,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create Site
+   * Create a new site.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns SitePublic Successful Response
+   * @throws ApiError
+   */
+  public static createSite(
+    data: SitesCreateSiteData,
+  ): CancelablePromise<SitesCreateSiteResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/sites/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read Site
+   * Get site by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns SitePublic Successful Response
+   * @throws ApiError
+   */
+  public static readSite(
+    data: SitesReadSiteData,
+  ): CancelablePromise<SitesReadSiteResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/sites/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update Site
+   * Update an site.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns SitePublic Successful Response
+   * @throws ApiError
+   */
+  public static updateSite(
+    data: SitesUpdateSiteData,
+  ): CancelablePromise<SitesUpdateSiteResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/sites/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Site
+   * Delete an site.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteSite(
+    data: SitesDeleteSiteData,
+  ): CancelablePromise<SitesDeleteSiteResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/sites/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
+
 export class UsersService {
   /**
    * Read Users
@@ -326,7 +429,7 @@ export class UsersService {
 
   /**
    * Create User
-   * Create new user.
+   * Create a new user.
    * @param data The data for the request.
    * @param data.requestBody
    * @returns UserPublic Successful Response
@@ -418,7 +521,7 @@ export class UsersService {
 
   /**
    * Register User
-   * Create new user without the need to be logged in.
+   * Create a new user without the need to be logged in.
    * @param data The data for the request.
    * @param data.requestBody
    * @returns UserPublic Successful Response
@@ -442,7 +545,7 @@ export class UsersService {
    * Read User By Id
    * Get a specific user by id.
    * @param data The data for the request.
-   * @param data.userId
+   * @param data.id
    * @returns UserPublic Successful Response
    * @throws ApiError
    */
@@ -451,9 +554,9 @@ export class UsersService {
   ): CancelablePromise<UsersReadUserByIdResponse> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/api/v1/users/{user_id}",
+      url: "/api/v1/users/{id}",
       path: {
-        user_id: data.userId,
+        id: data.id,
       },
       errors: {
         422: "Validation Error",
@@ -465,7 +568,7 @@ export class UsersService {
    * Update User
    * Update a user.
    * @param data The data for the request.
-   * @param data.userId
+   * @param data.id
    * @param data.requestBody
    * @returns UserPublic Successful Response
    * @throws ApiError
@@ -475,9 +578,9 @@ export class UsersService {
   ): CancelablePromise<UsersUpdateUserResponse> {
     return __request(OpenAPI, {
       method: "PATCH",
-      url: "/api/v1/users/{user_id}",
+      url: "/api/v1/users/{id}",
       path: {
-        user_id: data.userId,
+        id: data.id,
       },
       body: data.requestBody,
       mediaType: "application/json",
@@ -491,7 +594,7 @@ export class UsersService {
    * Delete User
    * Delete a user.
    * @param data The data for the request.
-   * @param data.userId
+   * @param data.id
    * @returns Message Successful Response
    * @throws ApiError
    */
@@ -500,9 +603,9 @@ export class UsersService {
   ): CancelablePromise<UsersDeleteUserResponse> {
     return __request(OpenAPI, {
       method: "DELETE",
-      url: "/api/v1/users/{user_id}",
+      url: "/api/v1/users/{id}",
       path: {
-        user_id: data.userId,
+        id: data.id,
       },
       errors: {
         422: "Validation Error",

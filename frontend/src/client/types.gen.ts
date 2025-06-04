@@ -14,13 +14,19 @@ export type HTTPValidationError = {
 }
 
 export type ItemCreate = {
-  title: string
-  description?: string | null
+  date_created?: string
+  date_stamped: string
+  entity_index: number
+  is_in: boolean
+  is_up: boolean
 }
 
 export type ItemPublic = {
-  title: string
-  description?: string | null
+  date_created?: string
+  date_stamped: string
+  entity_index: number
+  is_in: boolean
+  is_up: boolean
   id: string
   owner_id: string
 }
@@ -28,11 +34,6 @@ export type ItemPublic = {
 export type ItemsPublic = {
   data: Array<ItemPublic>
   count: number
-}
-
-export type ItemUpdate = {
-  title?: string | null
-  description?: string | null
 }
 
 export type Message = {
@@ -49,6 +50,40 @@ export type PrivateUserCreate = {
   password: string
   full_name: string
   is_verified?: boolean
+}
+
+export type SiteCreate = {
+  name: string
+  address: string
+  latitude: number
+  longitude: number
+  model: string
+  url: string
+}
+
+export type SitePublic = {
+  name: string
+  address: string
+  latitude: number
+  longitude: number
+  model: string
+  url: string
+  id: string
+  owner_id: string
+}
+
+export type SitesPublic = {
+  data: Array<SitePublic>
+  count: number
+}
+
+export type SiteUpdate = {
+  name?: string | null
+  address?: string | null
+  latitude: number | null
+  longitude: number | null
+  model: number | null
+  url: string | null
 }
 
 export type Token = {
@@ -126,13 +161,6 @@ export type ItemsReadItemData = {
 
 export type ItemsReadItemResponse = ItemPublic
 
-export type ItemsUpdateItemData = {
-  id: string
-  requestBody: ItemUpdate
-}
-
-export type ItemsUpdateItemResponse = ItemPublic
-
 export type ItemsDeleteItemData = {
   id: string
 }
@@ -171,6 +199,38 @@ export type PrivateCreateUserData = {
 
 export type PrivateCreateUserResponse = UserPublic
 
+export type SitesReadSitesData = {
+  limit?: number
+  skip?: number
+}
+
+export type SitesReadSitesResponse = SitesPublic
+
+export type SitesCreateSiteData = {
+  requestBody: SiteCreate
+}
+
+export type SitesCreateSiteResponse = SitePublic
+
+export type SitesReadSiteData = {
+  id: string
+}
+
+export type SitesReadSiteResponse = SitePublic
+
+export type SitesUpdateSiteData = {
+  id: string
+  requestBody: SiteUpdate
+}
+
+export type SitesUpdateSiteResponse = SitePublic
+
+export type SitesDeleteSiteData = {
+  id: string
+}
+
+export type SitesDeleteSiteResponse = Message
+
 export type UsersReadUsersData = {
   limit?: number
   skip?: number
@@ -207,20 +267,20 @@ export type UsersRegisterUserData = {
 export type UsersRegisterUserResponse = UserPublic
 
 export type UsersReadUserByIdData = {
-  userId: string
+  id: string
 }
 
 export type UsersReadUserByIdResponse = UserPublic
 
 export type UsersUpdateUserData = {
+  id: string
   requestBody: UserUpdate
-  userId: string
 }
 
 export type UsersUpdateUserResponse = UserPublic
 
 export type UsersDeleteUserData = {
-  userId: string
+  id: string
 }
 
 export type UsersDeleteUserResponse = Message
