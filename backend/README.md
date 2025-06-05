@@ -18,14 +18,15 @@
 - [x] 🚚 Rename `ping_hub_interval` into `interval_ping`
 - [x] 🚚 Rename `DEFAULT_HUB_PING_INTERVAL` into `DEFAULT_HUB_INTERVAL_PING`
 - [x] ✏️ Resolve port typo
+- [x] 📄 Add MIT license
+- [x] ⚗️ Add streaming only
+- [x] 🐛 Prevent backend stopped when failed to create edge user
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
 - [ ] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
-- [x] 📄 Add MIT license
-- [x] ⚗️ Add streaming only
-- [x] 🐛 Prevent backend stopped when failed to create edge user
+- [ ] ✨ Add auto-clear item if item data is_up and more than 6 hours ago
 
 ## Requirements
 
