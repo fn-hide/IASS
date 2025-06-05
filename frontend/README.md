@@ -5,6 +5,7 @@ The frontend is built with [Vite](https://vitejs.dev/), [React](https://reactjs.
 ## TODO
 
 - [x] 💥 Remove CUD for item and update user id parameter
+- [x] 💄 Update favicon, banner, and color theme (teal to purple)
 
 ## Frontend development
 
