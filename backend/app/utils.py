@@ -241,8 +241,14 @@ async def create_edge_user() -> None:
             "password": settings.FIRST_SUPERUSER_PASSWORD,
             "full_name": "edge",
         }
-        response = await client.post(url, headers=headers, json=data)
-        if response.status_code != 200:
-            logger.error("🚨 Failed to register a new edge user!")
-        logger.error("🎉 Successfully registered a new edge user.")
-        return None
+        try:
+            response = await client.post(url, headers=headers, json=data)
+            if response.status_code != 200:
+                logger.error("🚨 Failed to register a new edge user!")
+            else:
+                logger.error("🎉 Successfully registered a new edge user.")
+        except Exception as e:
+            logger.error(
+                f"❌ Raise global exception while create edge user in hub: {e}"
+            )
+    return None

@@ -25,6 +25,7 @@
 - [ ] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
 - [x] 📄 Add MIT license
 - [x] ⚗️ Add streaming only
+- [x] 🐛 Prevent backend stopped when failed to create edge user
 
 ## Requirements
 
