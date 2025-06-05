@@ -109,6 +109,12 @@ function Login() {
             Sign Up
           </RouterLink>
         </Text>
+        <Text>
+          Check this fancy tool out 👉 {" "}
+          <a href="../polygonzone/index.html" className="main-link">
+            Polygon Zone
+          </a>
+        </Text>
       </Container>
     </>
   )

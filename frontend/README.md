@@ -6,6 +6,7 @@ The frontend is built with [Vite](https://vitejs.dev/), [React](https://reactjs.
 
 - [x] 💥 Remove CUD for item and update user id parameter
 - [x] 💄 Update favicon, banner, and color theme (teal to purple)
+- [x] ✨ Add polygonzone
 
 ## Frontend development
 
