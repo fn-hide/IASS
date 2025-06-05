@@ -8,6 +8,7 @@ The frontend is built with [Vite](https://vitejs.dev/), [React](https://reactjs.
 - [x] 💄 Update favicon, banner, and color theme (teal to purple)
 - [x] ✨ Add polygon zone
 - [x] ✨ Add "return to home" link. Replace it with roboflow logo.
+- [x] 💄 Update IASS Banner with smaller size
 
 ## Frontend development
 
