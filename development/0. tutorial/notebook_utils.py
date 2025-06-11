@@ -148,9 +148,7 @@ def download_file(
             url=url, headers={"User-agent": "Mozilla/5.0"}, stream=True
         )
         response.raise_for_status()
-    except (
-        requests.exceptions.HTTPError
-    ) as error:  # For error associated with not-200 codes. Will output something like: "404 Client Error: Not Found for url: {url}"
+    except requests.exceptions.HTTPError as error:  # For error associated with not-200 codes. Will output something like: "404 Client Error: Not Found for url: {url}"
         raise Exception(error) from None
     except requests.exceptions.Timeout:
         raise Exception(
@@ -358,8 +356,6 @@ class VideoPlayer:
     """
 
     def next(self):
-        import cv2
-
         with self.__lock:
             if self.__frame is None:
                 return None
@@ -552,7 +548,6 @@ def viz_result_image(
     :return: Matplotlib figure with result image
     """
     import cv2
-    import numpy as np
     import matplotlib.pyplot as plt
     from matplotlib.lines import Line2D
 

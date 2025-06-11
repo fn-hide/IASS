@@ -23,6 +23,7 @@
 - [x] 🐛 Prevent backend stopped when failed to create edge user
 - [x] ➕ Add pytorch cuda 118 dependency
 - [x] 🚚 Move pyproject.toml and uv.lock into backend directory
+- [x] 🚚 Rename notebook to development
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
