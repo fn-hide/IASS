@@ -71,6 +71,7 @@ Currently, there is only **one Super Hub** in the system. Future versions may su
 - Backend: [Documentation](./backend/README.md).
 - Frontend: [Documentation](./frontend/README.md).
 - Frontend Dashboard: [Documentation](./frontend_dashboard/README.md).
+- Development: [Development](./development/README.md).
 
 ## Release Notes
 
