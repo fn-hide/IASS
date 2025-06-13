@@ -25,6 +25,7 @@ if __name__ == "__main__":
     export(
         "./asset/result/data_yolo11m_100/detect/train/weights/best.pt",
         "onnx",
-        "dynamic",
-        dynamic=True,
+        "cpu_nms",
+        device="cpu",
+        nms=True,
     )
