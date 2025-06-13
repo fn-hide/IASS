@@ -26,6 +26,7 @@
 - [x] 🚚 Rename notebook to development
 - [x] ✨ Add adjust site region function
 - [x] ➕ Add numpy and onnxruntime-gpu
+- [x] ✨ Add path, format, and name on export script
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)

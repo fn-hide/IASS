@@ -1,13 +1,30 @@
+import os
 from ultralytics import YOLO
 
 
-def export():
-    import os
+def export(path: str, format: str, name: str, **kwargs):
+    dirpath, basename = os.path.split(path)
+    filename, ext = os.path.splitext(basename)
 
-    print(os.getcwd())
-    model = YOLO("./asset/result/yolo11n_100_best.pt")
-    model.export(format="engine")
+    dstpath = os.path.join(dirpath, f"{filename}.{format}")
+    tmppath = os.path.join(dirpath, f"{filename}_temp.{format}")
+    newpath = os.path.join(dirpath, f"{filename}_{name}.{format}")
+
+    if os.path.exists(dstpath):
+        os.rename(dstpath, tmppath)
+
+    model = YOLO(path)
+    model.export(format=format, **kwargs)
+
+    os.rename(dstpath, newpath)
+    if os.path.exists(tmppath):
+        os.rename(tmppath, dstpath)
 
 
 if __name__ == "__main__":
-    export()
+    export(
+        "./asset/result/data_yolo11m_100/detect/train/weights/best.pt",
+        "onnx",
+        "dynamic",
+        dynamic=True,
+    )
