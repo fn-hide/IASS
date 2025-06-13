@@ -24,7 +24,7 @@ dependencies = [
     "pyjwt<3.0.0,>=2.8.0",
     "fastapi-utils[all]>=0.8.0",
     "numpy==1.26.4",
-    "onnxruntime-gpu==1.18.0",
+    "onnxruntime-gpu==1.22.0",
 ]
 
 [dependency-groups]
