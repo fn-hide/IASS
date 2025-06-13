@@ -36,7 +36,7 @@ class VehicleStreamer:
         while state.running.is_set():
             i_frame += 1
             if i_frame % 2 == 0:
-                logger.info("▶️ Reading frame..")
+                # logger.info("▶️ Reading frame..")
                 ret, frame = self.cap.read()
                 if not ret:
                     logger.warning(
@@ -50,7 +50,7 @@ class VehicleStreamer:
                 except queue.Full:
                     logger.warning("⚠️ Queue full, dropping frame..")
             else:
-                logger.info("⏯️ Skipping frame..")
+                # logger.info("⏯️ Skipping frame..")
                 self.cap.grab()
 
         self.cap.release()
