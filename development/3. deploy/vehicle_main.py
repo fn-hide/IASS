@@ -30,7 +30,10 @@ if __name__ == "__main__":
         line_width=2,
     )
 
+    # ip-nvr
     url = "rtsp://huda:Burunghudhud112@192.168.50.250:554/Streaming/Channels/101/"
+    # ip-cam
+    url = "rtsp://huda:Burunghudhud112@192.168.50.26:554/Streaming/Channels/101/"
     vehicle_streamer = VehicleStreamer(url, 1, 20)
     vehicle_counter = VehicleCounter(
         counter,
