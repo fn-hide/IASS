@@ -38,6 +38,7 @@ if __name__ == "__main__":
         line_in,
         line_out,
         polygon,
+        # False,
         verbose=1,
     )
 
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     t1.start()
     t2.start()
 
-    # t1.join()
-    # t2.join()
+    t1.join()
+    t2.join()
 
     print("✅ Program exited gracefully")

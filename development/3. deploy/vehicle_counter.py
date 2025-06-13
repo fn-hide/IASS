@@ -27,6 +27,7 @@ class VehicleCounter:
         line_in: np.ndarray,
         line_out: np.ndarray,
         polygon: np.ndarray,
+        is_counter=True,
         verbose=0,
     ):
         self.counter = counter
@@ -35,6 +36,7 @@ class VehicleCounter:
         self.line_in = line_in
         self.line_out = line_out
         self.polygon = polygon
+        self.is_counter = is_counter
         self.verbose = verbose
 
         if self.verbose:
@@ -56,14 +58,20 @@ class VehicleCounter:
                 continue
             im1 = frame.copy()
 
-            # counter
-            im1 = crop_and_mask_image(
-                im1, self.x_min, self.y_min, self.x_max, self.y_max, self.polygon
-            )
-            result = self.counter.process(im1)
-            im1 = stack_image(
-                frame, result.plot_im, self.x_min, self.y_min, self.x_max, self.y_max
-            )
+            if self.is_counter:
+                # counter
+                im1 = crop_and_mask_image(
+                    im1, self.x_min, self.y_min, self.x_max, self.y_max, self.polygon
+                )
+                result = self.counter.process(im1)
+                im1 = stack_image(
+                    frame,
+                    result.plot_im,
+                    self.x_min,
+                    self.y_min,
+                    self.x_max,
+                    self.y_max,
+                )
 
             # fps
             curr_time = time.time()
