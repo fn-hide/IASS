@@ -25,9 +25,9 @@ if __name__ == "__main__":
         region=line_out,
         model=model,
         show=False,
-        show_in=True,
-        show_out=True,
-        line_width=1,
+        show_in=False,
+        show_out=False,
+        line_width=2,
     )
 
     url = "rtsp://huda:Burunghudhud112@192.168.50.250:554/Streaming/Channels/101/"

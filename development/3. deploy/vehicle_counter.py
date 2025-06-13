@@ -42,6 +42,23 @@ class VehicleCounter:
         if self.verbose:
             logger.info(ultralytics_checks())
 
+    def display_counts(self, plot_im: np.ndarray, show_in=True, show_out=True):
+        """Override ObjectCounter display_counts"""
+        labels_dict = {
+            str.capitalize(key): f"{'IN ' + str(value['IN']) if show_in else ''} "
+            f"{'OUT ' + str(value['OUT']) if show_out else ''}".strip()
+            for key, value in self.counter.classwise_counts.items()
+            if value["IN"] != 0 or value["OUT"] != 0
+        }
+        if labels_dict:
+            self.counter.annotator.display_analytics(
+                plot_im,
+                labels_dict,
+                (104, 31, 17),
+                (255, 255, 255),
+                self.counter.margin,
+            )
+
     def run(self):
         # show
         if self.verbose:
@@ -80,6 +97,7 @@ class VehicleCounter:
 
             # show
             if self.verbose:
+                self.display_counts(im1)
                 cv.putText(
                     im1,
                     f"FPS: {fps:.0f}",
