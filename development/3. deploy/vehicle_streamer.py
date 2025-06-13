@@ -32,19 +32,26 @@ class VehicleStreamer:
             state.running.clear()
             return
 
+        i_frame = 0
         while state.running.is_set():
-            ret, frame = self.cap.read()
-            if not ret:
-                logger.warning(
-                    "⚠️ Video frame is empty or video processing has been successfully completed."
-                )
-                state.running.clear()
-                break
+            i_frame += 1
+            if i_frame % 2 == 0:
+                logger.info("▶️ Reading frame..")
+                ret, frame = self.cap.read()
+                if not ret:
+                    logger.warning(
+                        "⚠️ Video frame is empty or video processing has been successfully completed."
+                    )
+                    state.running.clear()
+                    break
 
-            try:
-                state.queue.put(frame, timeout=1)
-            except queue.Full:
-                logger.warning("⚠️ Queue full, dropping frame..")
+                try:
+                    state.queue.put(frame, timeout=1)
+                except queue.Full:
+                    logger.warning("⚠️ Queue full, dropping frame..")
+            else:
+                logger.info("⏯️ Skipping frame..")
+                self.cap.grab()
 
         self.cap.release()
         logger.info("🔚 Stream stopped")

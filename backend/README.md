@@ -29,6 +29,7 @@
 - [x] ✨ Add path, format, and name on export script
 - [x] ✨ Add thread for vehicle streamer and counter
 - [x] ✨ Add is_counter param to hide heavy computation
+- [x] ✨ Add skip frame to prevent drop/broke frame
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
