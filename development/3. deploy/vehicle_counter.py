@@ -10,9 +10,10 @@ import logging
 import cv2 as cv
 import numpy as np
 from ultralytics import checks as ultralytics_checks
-from ultralytics.solutions import ObjectCounter
+# from ultralytics.solutions import ObjectCounter
 
 from vehicle_state import state
+from vehicle_base import VehicleBase as ObjectCounter
 
 
 logging.basicConfig(level=logging.INFO)
@@ -80,7 +81,8 @@ class VehicleCounter:
                 im1 = crop_and_mask_image(
                     im1, self.x_min, self.y_min, self.x_max, self.y_max, self.polygon
                 )
-                result = self.counter.process(im1)
+                result, list_counted = self.counter.process(im1)
+                logger.info(list_counted)
                 im1 = stack_image(
                     frame,
                     result.plot_im,

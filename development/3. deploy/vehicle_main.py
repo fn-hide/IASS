@@ -1,9 +1,10 @@
 import threading
 from ultralytics import YOLO
-from ultralytics.solutions import ObjectCounter
+# from ultralytics.solutions import ObjectCounter
 
 from vehicle_streamer import VehicleStreamer
 from vehicle_counter import VehicleCounter
+from vehicle_base import VehicleBase as ObjectCounter
 
 
 if __name__ == "__main__":

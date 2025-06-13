@@ -34,6 +34,7 @@
 - [x] 📌 Pin onnxruntime-gpu to specific version, i.e. onnxruntime-gpu==1.18.0
 - [x] 🍱 Add ip-cam
 - [x] 📦️ Export onnx with dynamic, nms, device, half, and batch
+- [x] ✨ Return track id, datetime, cls, conf, and count type
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
