@@ -8,12 +8,11 @@ import time
 
 import cv2 as cv
 import numpy as np
-from counter import Counter as ObjectCounter
-
-# from ultralytics.solutions import ObjectCounter
-from state import state
 from ultralytics import checks as ultralytics_checks
-from utils import crop_and_mask_image, stack_image
+
+from .counter import Counter as ObjectCounter
+from .state import state
+from .utils import crop_and_mask_image, stack_image
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

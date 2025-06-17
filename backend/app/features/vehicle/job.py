@@ -1,11 +1,12 @@
 import threading
 
-from counter import Counter as ObjectCounter
-from predictor import Predictor
-
-# from ultralytics.solutions import ObjectCounter
-from streamer import Streamer
 from ultralytics import YOLO
+
+from app.features.vehicle.utils import adjust_site_region
+
+from .counter import Counter as ObjectCounter
+from .predictor import Predictor
+from .streamer import Streamer
 
 
 class Job:

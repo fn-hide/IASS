@@ -40,6 +40,7 @@
 - [x] ✨ Add VehicleJob class
 - [x] 🚚 Organize and rename realtime feature
 - [x] 🚚 Move realtime to vehicle_counter
+- [x] ✨ Add an api for realtime vehicle counter
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
