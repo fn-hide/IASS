@@ -1,10 +1,11 @@
 import threading
-from ultralytics import YOLO
-# from ultralytics.solutions import ObjectCounter
 
-from streamer import Streamer
-from predictor import Predictor
 from counter import Counter as ObjectCounter
+from predictor import Predictor
+
+# from ultralytics.solutions import ObjectCounter
+from streamer import Streamer
+from ultralytics import YOLO
 
 
 class VehicleJob:

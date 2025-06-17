@@ -2,19 +2,18 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), "development")))
-from utils import crop_and_mask_image, stack_image
-
+import logging
 import queue
 import time
-import logging
+
 import cv2 as cv
 import numpy as np
-from ultralytics import checks as ultralytics_checks
-# from ultralytics.solutions import ObjectCounter
-
-from state import state
 from counter import Counter as ObjectCounter
 
+# from ultralytics.solutions import ObjectCounter
+from state import state
+from ultralytics import checks as ultralytics_checks
+from utils import crop_and_mask_image, stack_image
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

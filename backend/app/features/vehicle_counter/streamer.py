@@ -1,9 +1,8 @@
-import queue
 import logging
+import queue
+
 import cv2 as cv
-
 from state import state
-
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

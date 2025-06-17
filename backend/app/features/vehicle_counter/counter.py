@@ -1,9 +1,9 @@
 import threading
 from datetime import datetime
-from typing import Optional, Tuple
+
+from ultralytics.solutions import ObjectCounter
 from ultralytics.solutions.solutions import SolutionAnnotator, SolutionResults
 from ultralytics.utils.plotting import colors
-from ultralytics.solutions import ObjectCounter
 
 
 class Counter(ObjectCounter):
@@ -13,9 +13,9 @@ class Counter(ObjectCounter):
 
     def count_objects(
         self,
-        current_centroid: Tuple[float, float],
+        current_centroid: tuple[float, float],
         track_id: int,
-        prev_position: Optional[Tuple[float, float]],
+        prev_position: tuple[float, float] | None,
         cls: int,
     ) -> str:
         """
@@ -130,7 +130,7 @@ class Counter(ObjectCounter):
         # Iterate over bounding boxes, track ids and classes index
         list_counted = []
         for box, track_id, cls, conf in zip(
-            self.boxes, self.track_ids, self.clss, self.confs
+            self.boxes, self.track_ids, self.clss, self.confs, strict=False
         ):
             # Draw bounding box and counting region
             self.annotator.box_label(
