@@ -36,6 +36,7 @@
 - [x] 📦️ Export onnx with dynamic, nms, device, half, and batch
 - [x] ✨ Return track id, datetime, cls, conf, and count type
 - [x] 🧵 Add threading lock for VehicleBase, the child of ObjectCounter
+- [x] 🚚 Rename vehicle_main.py into vehicle_job.py
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
