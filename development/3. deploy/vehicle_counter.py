@@ -81,7 +81,8 @@ class VehicleCounter:
                 im1 = crop_and_mask_image(
                     im1, self.x_min, self.y_min, self.x_max, self.y_max, self.polygon
                 )
-                result, list_counted = self.counter.process(im1)
+                with self.counter.lock:
+                    result, list_counted = self.counter.process(im1)
                 logger.info(list_counted)
                 im1 = stack_image(
                     frame,

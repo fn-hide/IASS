@@ -1,3 +1,4 @@
+import threading
 from datetime import datetime
 from typing import Optional, Tuple
 from ultralytics.solutions.solutions import SolutionAnnotator, SolutionResults
@@ -8,6 +9,7 @@ from ultralytics.solutions import ObjectCounter
 class VehicleBase(ObjectCounter):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.lock = threading.Lock()
 
     def count_objects(
         self,

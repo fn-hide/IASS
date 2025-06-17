@@ -35,6 +35,7 @@
 - [x] 🍱 Add ip-cam
 - [x] 📦️ Export onnx with dynamic, nms, device, half, and batch
 - [x] ✨ Return track id, datetime, cls, conf, and count type
+- [x] 🧵 Add threading lock for VehicleBase, the child of ObjectCounter
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)
