@@ -6,7 +6,7 @@ from ultralytics.utils.plotting import colors
 from ultralytics.solutions import ObjectCounter
 
 
-class VehicleBase(ObjectCounter):
+class Counter(ObjectCounter):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.lock = threading.Lock()

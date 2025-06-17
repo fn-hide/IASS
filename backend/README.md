@@ -38,6 +38,7 @@
 - [x] 🧵 Add threading lock for VehicleBase, the child of ObjectCounter
 - [x] 🚚 Rename vehicle_main.py into vehicle_job.py
 - [x] ✨ Add VehicleJob class
+- [x] 🚚 Organize and rename realtime feature
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] ♻️ Move `insert_item` logic into `utils` module
 - [ ] 👷 Create different .env for each-edge backend (excluded from git)

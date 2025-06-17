@@ -2,14 +2,14 @@ import queue
 import logging
 import cv2 as cv
 
-from vehicle_state import state
+from state import state
 
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class VehicleStreamer:
+class Streamer:
     def __init__(
         self,
         url: str,

@@ -12,15 +12,15 @@ import numpy as np
 from ultralytics import checks as ultralytics_checks
 # from ultralytics.solutions import ObjectCounter
 
-from vehicle_state import state
-from vehicle_base import VehicleBase as ObjectCounter
+from state import state
+from counter import Counter as ObjectCounter
 
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class VehicleCounter:
+class Predictor:
     def __init__(
         self,
         counter: ObjectCounter,

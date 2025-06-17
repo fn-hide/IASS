@@ -2,9 +2,9 @@ import threading
 from ultralytics import YOLO
 # from ultralytics.solutions import ObjectCounter
 
-from vehicle_streamer import VehicleStreamer
-from vehicle_counter import VehicleCounter
-from vehicle_base import VehicleBase as ObjectCounter
+from streamer import Streamer
+from predictor import Predictor
+from counter import Counter as ObjectCounter
 
 
 class VehicleJob:
@@ -29,13 +29,13 @@ class VehicleJob:
             show_out=False,
             line_width=2,
         )
-        streamer = VehicleStreamer(self.url_stream, 1, 20)
-        vehicle_counter = VehicleCounter(
+        streamer = Streamer(self.url_stream, 1, 20)
+        predictor = Predictor(
             counter, (x_min, y_min, x_max, y_max), line_in, line_out, polygon, verbose=1
         )
 
         self.thread_streamer = threading.Thread(target=streamer.run, daemon=True)
-        self.thread_counter = threading.Thread(target=vehicle_counter.run, daemon=True)
+        self.thread_counter = threading.Thread(target=predictor.run, daemon=True)
 
         self.thread_streamer.start()
         self.thread_counter.start()
@@ -44,7 +44,7 @@ class VehicleJob:
 
 
 # store running jobs globally
-STREAM_JOBS = {}
+JOBS = {}
 
 
 if __name__ == "__main__":
@@ -75,8 +75,8 @@ if __name__ == "__main__":
     url = "rtsp://huda:Burunghudhud112@192.168.50.250:554/Streaming/Channels/101/"
     # ip-cam
     url = "rtsp://huda:Burunghudhud112@192.168.50.26:554/Streaming/Channels/101/"
-    vehicle_streamer = VehicleStreamer(url, 1, 20)
-    vehicle_counter = VehicleCounter(
+    streamer = Streamer(url, 1, 20)
+    predictor = Predictor(
         counter,
         (x_min, y_min, x_max, y_max),
         line_in,
@@ -86,8 +86,8 @@ if __name__ == "__main__":
         verbose=1,
     )
 
-    t1 = threading.Thread(target=vehicle_streamer.run)
-    t2 = threading.Thread(target=vehicle_counter.run)
+    t1 = threading.Thread(target=streamer.run)
+    t2 = threading.Thread(target=predictor.run)
 
     t1.start()
     t2.start()
