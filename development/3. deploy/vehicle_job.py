@@ -7,6 +7,46 @@ from vehicle_counter import VehicleCounter
 from vehicle_base import VehicleBase as ObjectCounter
 
 
+class VehicleJob:
+    def __init__(self, url_stream: str, path_model: str, region_config):
+        self.url_stream = url_stream
+        self.path_model = path_model
+        self.region_config = region_config
+        self.thread_streamer = None
+        self.thread_counter = None
+
+    def start(self):
+        (x_min, y_min, x_max, y_max), polygon, line_in, line_out = adjust_site_region(
+            *self.region_config
+        )
+
+        model = YOLO(self.path_model)
+        counter = ObjectCounter(
+            region=line_out,
+            model=model,
+            show=False,
+            show_in=False,
+            show_out=False,
+            line_width=2,
+        )
+        streamer = VehicleStreamer(self.url_stream, 1, 20)
+        vehicle_counter = VehicleCounter(
+            counter, (x_min, y_min, x_max, y_max), line_in, line_out, polygon, verbose=1
+        )
+
+        self.thread_streamer = threading.Thread(target=streamer.run, daemon=True)
+        self.thread_counter = threading.Thread(target=vehicle_counter.run, daemon=True)
+
+        self.thread_streamer.start()
+        self.thread_counter.start()
+
+        print(f"✅ Stream started for {self.url_stream}")
+
+
+# store running jobs globally
+STREAM_JOBS = {}
+
+
 if __name__ == "__main__":
     import os
     import sys
