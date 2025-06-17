@@ -8,7 +8,7 @@ from streamer import Streamer
 from ultralytics import YOLO
 
 
-class VehicleJob:
+class Job:
     def __init__(self, url_stream: str, path_model: str, region_config):
         self.url_stream = url_stream
         self.path_model = path_model
