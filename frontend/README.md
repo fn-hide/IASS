@@ -12,6 +12,7 @@ The frontend is built with [Vite](https://vitejs.dev/), [React](https://reactjs.
 - [x] 💄 Update item components
 - [x] ✨ Add sites page
 - [x] 🐛 Resolve inconsistent data type and add "any" step into latitude and longitude input
+- [x] ✨ Add hubs page
 
 ## Frontend development
 

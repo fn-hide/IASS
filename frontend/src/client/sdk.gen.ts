@@ -4,6 +4,16 @@ import type { CancelablePromise } from "./core/CancelablePromise"
 import { OpenAPI } from "./core/OpenAPI"
 import { request as __request } from "./core/request"
 import type {
+  HubsReadHubsData,
+  HubsReadHubsResponse,
+  HubsCreateHubData,
+  HubsCreateHubResponse,
+  HubsReadHubData,
+  HubsReadHubResponse,
+  HubsUpdateHubData,
+  HubsUpdateHubResponse,
+  HubsDeleteHubData,
+  HubsDeleteHubResponse,
   ItemsReadItemsData,
   ItemsReadItemsResponse,
   ItemsCreateItemData,
@@ -59,6 +69,127 @@ import type {
   VehiclesStartJobData,
   VehiclesStartJobResponse,
 } from "./types.gen"
+
+export class HubsService {
+  /**
+   * Read Hubs
+   * Retrieve hubs.
+   * @param data The data for the request.
+   * @param data.skip
+   * @param data.limit
+   * @returns HubsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readHubs(
+    data: HubsReadHubsData = {},
+  ): CancelablePromise<HubsReadHubsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/hubs/",
+      query: {
+        skip: data.skip,
+        limit: data.limit,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create Hub
+   * Create a new hub.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns HubPublic Successful Response
+   * @throws ApiError
+   */
+  public static createHub(
+    data: HubsCreateHubData,
+  ): CancelablePromise<HubsCreateHubResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/hubs/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read Hub
+   * Get hub by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns HubPublic Successful Response
+   * @throws ApiError
+   */
+  public static readHub(
+    data: HubsReadHubData,
+  ): CancelablePromise<HubsReadHubResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/hubs/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update Hub
+   * Update an hub.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns HubPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateHub(
+    data: HubsUpdateHubData,
+  ): CancelablePromise<HubsUpdateHubResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/hubs/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Hub
+   * Delete an hub.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteHub(
+    data: HubsDeleteHubData,
+  ): CancelablePromise<HubsDeleteHubResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/hubs/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
 
 export class ItemsService {
   /**

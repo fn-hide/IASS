@@ -13,6 +13,46 @@ export type HTTPValidationError = {
   detail?: Array<ValidationError>
 }
 
+export type HubCreate = {
+  name: string
+  address: string
+  latitude: number
+  longitude: number
+  host: string
+  port: string
+  interval_ping: number
+  limit_send: number
+}
+
+export type HubPublic = {
+  name: string
+  address: string
+  latitude: number
+  longitude: number
+  host: string
+  port: string
+  interval_ping: number
+  limit_send: number
+  id: string
+  owner_id: string
+}
+
+export type HubsPublic = {
+  data: Array<HubPublic>
+  count: number
+}
+
+export type HubUpdate = {
+  name?: string | null
+  address?: string | null
+  latitude: number | null
+  longitude: number | null
+  host: string | null
+  port: string | null
+  interval_ping: number | null
+  limit_send: number | null
+}
+
 export type ItemCreate = {
   date_created?: string
   date_stamped: string
@@ -158,6 +198,38 @@ export type ValidationError = {
   msg: string
   type: string
 }
+
+export type HubsReadHubsData = {
+  limit?: number
+  skip?: number
+}
+
+export type HubsReadHubsResponse = HubsPublic
+
+export type HubsCreateHubData = {
+  requestBody: HubCreate
+}
+
+export type HubsCreateHubResponse = HubPublic
+
+export type HubsReadHubData = {
+  id: string
+}
+
+export type HubsReadHubResponse = HubPublic
+
+export type HubsUpdateHubData = {
+  id: string
+  requestBody: HubUpdate
+}
+
+export type HubsUpdateHubResponse = HubPublic
+
+export type HubsDeleteHubData = {
+  id: string
+}
+
+export type HubsDeleteHubResponse = Message
 
 export type ItemsReadItemsData = {
   limit?: number
