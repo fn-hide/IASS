@@ -43,10 +43,11 @@
 - [x] ✨ Add an api for realtime vehicle counter
 - [x] 🗃️ Add track id, rename identity_index, and add track id
 - [x] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
-- [x] ✨ Insert detected vehicle into database at realtim
+- [x] ✨ Insert detected vehicle into database at realtime
 - [x] 🗃️ Add line in, line out, and polygon
 - [x] ✨ Add auto-clear item if item data is_up
 - [x] ✨ Add vehicles api and receive the id parameter
+- [x] 🔧 Add directory in pydantic settings
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
 

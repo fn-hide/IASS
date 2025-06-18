@@ -1,3 +1,4 @@
+import os
 import secrets
 import warnings
 from typing import Annotated, Any, Literal
@@ -31,6 +32,11 @@ class Settings(BaseSettings):
         env_ignore_empty=True,
         extra="ignore",
     )
+
+    DIR_IASS: str = os.path.abspath(os.path.join(os.getcwd(), ".."))
+    DIR_BACKEND: str = os.path.join(DIR_IASS, "backend")
+    DIR_ASSETS: str = os.path.join(DIR_BACKEND, "assets")
+
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = secrets.token_urlsafe(32)
     # 60 minutes * 24 hours * 8 days = 8 days
