@@ -13,6 +13,9 @@ class SiteBase(BaseModel):
     longitude: float
     model: str = Field(min_length=1, max_length=255)
     url: str
+    line_in: str
+    line_out: str
+    polygon: str
 
 
 # Properties to receive on item creation
@@ -28,6 +31,9 @@ class SiteUpdate(SiteBase):
     longitude: float | None  # type: ignore
     model: float | None  # type: ignore
     url: str | None  # type: ignore
+    line_in: str | None  # type: ignore
+    line_out: str | None  # type: ignore
+    polygon: str | None  # type: ignore
 
 
 # Properties to return via API, id is always required
