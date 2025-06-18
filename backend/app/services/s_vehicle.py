@@ -1,3 +1,6 @@
+import os
+import uuid
+
 from app.features.vehicle.job import JOBS, Job
 from app.services import SSite
 
@@ -9,18 +12,12 @@ class SVehicle:
     def read_jobs(self) -> list[str]:
         return list(JOBS.keys())
 
-    def start_job(self):
-        # ip-cam
-        url = "rtsp://huda:Burunghudhud112@192.168.50.26:554/Streaming/Channels/101/"
+    def start_job(self, id: uuid.UUID):
+        site = self.ssite.read_site(id)
 
-        line_in = None
-        line_out = [[839, 20], [1157, 1333]]
-        polygon = [[1157, 72], [1516, 278], [854, 1101], [707, 146]]
-        region_config = (polygon, line_in, line_out)
-
-        path_model = "C:/Users/eats/projects/IASS/asset/result/data_yolo11m_100/detect/train/weights/best.pt"
-
-        job = Job(url_stream=url, path_model=path_model, region_config=region_config)
+        model = os.path.join(os.path.abspath(os.getcwd()), site.model)
+        region_config = eval(site.polygon), eval(site.line_in), eval(site.line_out)
+        job = Job(url_stream=site.url, path_model=model, region_config=region_config)
         job.start()
 
-        JOBS[url] = job
+        JOBS[site.url] = job

@@ -1,15 +1,17 @@
+import uuid
 from typing import Any
 
 from fastapi import APIRouter, Depends
 
-from app.api.deps import get_current_active_superuser
-from app.services import SVehicle
+from app.api.deps import SessionDep, get_current_active_superuser
+from app.repositories import RSite
+from app.services import SSite, SVehicle
 
-router = APIRouter(prefix="/sites/vehicles", tags=["vehicles"])
+router = APIRouter(prefix="/vehicles", tags=["vehicles"])
 
 
 @router.get(
-    "/",
+    "/jobs",
     dependencies=[Depends(get_current_active_superuser)],
 )
 def read_jobs() -> Any:
@@ -21,14 +23,16 @@ def read_jobs() -> Any:
     return svehicle.read_jobs()
 
 
-@router.get(
-    "/start_job",
+@router.post(
+    "/{id}/start",
     dependencies=[Depends(get_current_active_superuser)],
 )
-def start_job() -> Any:
+def start_job(session: SessionDep, id: uuid.UUID) -> Any:
     """
-    Start job.
+    Start a specific "job" i.e. vehicle counting.
     """
 
-    svehicle = SVehicle()
-    return svehicle.start_job()
+    rsite = RSite(session)
+    ssite = SSite(rsite)
+    svehicle = SVehicle(ssite)
+    return svehicle.start_job(id)
