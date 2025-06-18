@@ -56,20 +56,30 @@ export type PrivateUserCreate = {
 
 export type SiteCreate = {
   name: string
-  address: string
   latitude: number
   longitude: number
   model: string
-  url: string
+  username: string
+  password: string
+  host: string
+  port: string
+  line_in: string
+  line_out: string
+  polygon: string
 }
 
 export type SitePublic = {
   name: string
-  address: string
   latitude: number
   longitude: number
   model: string
-  url: string
+  username: string
+  password: string
+  host: string
+  port: string
+  line_in: string
+  line_out: string
+  polygon: string
   id: string
   owner_id: string
 }
@@ -81,11 +91,16 @@ export type SitesPublic = {
 
 export type SiteUpdate = {
   name?: string | null
-  address?: string | null
   latitude: number | null
   longitude: number | null
   model: number | null
-  url: string | null
+  username: string | null
+  password: string | null
+  host: string | null
+  port: string | null
+  line_in: string | null
+  line_out: string | null
+  polygon: string | null
 }
 
 export type Token = {
@@ -168,6 +183,8 @@ export type ItemsDeleteItemData = {
 }
 
 export type ItemsDeleteItemResponse = Message
+
+export type ItemsPruneResponse = Message
 
 export type LoginLoginAccessTokenData = {
   formData: Body_login_login_access_token
@@ -294,3 +311,11 @@ export type UtilsTestEmailData = {
 export type UtilsTestEmailResponse = Message
 
 export type UtilsHealthCheckResponse = boolean
+
+export type VehiclesReadJobsResponse = unknown
+
+export type VehiclesStartJobData = {
+  id: string
+}
+
+export type VehiclesStartJobResponse = unknown

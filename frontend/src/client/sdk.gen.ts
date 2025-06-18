@@ -12,6 +12,7 @@ import type {
   ItemsReadItemResponse,
   ItemsDeleteItemData,
   ItemsDeleteItemResponse,
+  ItemsPruneResponse,
   LoginLoginAccessTokenData,
   LoginLoginAccessTokenResponse,
   LoginTestTokenResponse,
@@ -54,6 +55,9 @@ import type {
   UtilsTestEmailData,
   UtilsTestEmailResponse,
   UtilsHealthCheckResponse,
+  VehiclesReadJobsResponse,
+  VehiclesStartJobData,
+  VehiclesStartJobResponse,
 } from "./types.gen"
 
 export class ItemsService {
@@ -147,6 +151,19 @@ export class ItemsService {
       errors: {
         422: "Validation Error",
       },
+    })
+  }
+
+  /**
+   * Prune
+   * Prune synchronized item.
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static prune(): CancelablePromise<ItemsPruneResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/items/prune",
     })
   }
 }
@@ -647,6 +664,44 @@ export class UtilsService {
     return __request(OpenAPI, {
       method: "GET",
       url: "/api/v1/utils/health-check/",
+    })
+  }
+}
+
+export class VehiclesService {
+  /**
+   * Read Jobs
+   * Retrieve jobs.
+   * @returns unknown Successful Response
+   * @throws ApiError
+   */
+  public static readJobs(): CancelablePromise<VehiclesReadJobsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/vehicles/jobs",
+    })
+  }
+
+  /**
+   * Start Job
+   * Start a specific "job" i.e. vehicle counting.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns unknown Successful Response
+   * @throws ApiError
+   */
+  public static startJob(
+    data: VehiclesStartJobData,
+  ): CancelablePromise<VehiclesStartJobResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/vehicles/{id}/start",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
     })
   }
 }
