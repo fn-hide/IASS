@@ -41,16 +41,13 @@ const AddHub = () => {
     criteriaMode: "all",
     defaultValues: {
       name: "",
+      address: "",
       latitude: 0,
       longitude: 0,
-      model: "",
-      line_in: "",
-      line_out: "",
-      polygon: "",
-      username: "",
-      password: "",
       host: "",
       port: "",
+      limit_send: 0,
+      interval_ping: 0,
     },
   })
 
