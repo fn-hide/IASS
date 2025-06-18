@@ -46,7 +46,7 @@
 - [x] ✨ Insert detected vehicle into database at realtim
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
-- [ ] ✨ Add auto-clear item if item data is_up and more than 6 hours ago
+- [x] ✨ Add auto-clear item if item data is_up
 
 ## Requirements
 

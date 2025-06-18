@@ -59,6 +59,17 @@ def create_item(
     return service.create_item(item_in=item_in, user_id=current_user.id)
 
 
+@router.delete("/prune", dependencies=[Depends(get_current_active_superuser)])
+def prune(session: SessionDep) -> Message:
+    """
+    Prune synchronized item.
+    """
+
+    repository = RItem(session=session)
+    service = SItem(repository=repository)
+    return service.prune_item()
+
+
 @router.delete("/{id}", dependencies=[Depends(get_current_active_superuser)])
 def delete_item(session: SessionDep, id: uuid.UUID) -> Message:
     """

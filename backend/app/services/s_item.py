@@ -30,3 +30,7 @@ class SItem:
         item_obj = self.read_item(id=id)
         self.repository.delete(item_obj)
         return Message(message="Item deleted successfully")
+
+    def prune_item(self) -> Message:
+        self.repository.delete_by_condition(is_up=True)
+        return Message(message="Item pruned successfully")
