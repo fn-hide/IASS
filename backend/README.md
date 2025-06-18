@@ -50,6 +50,7 @@
 - [x] 🔧 Add directory in pydantic settings
 - [x] 🗃️ Explode url into username, password, host, and port
 - [x] 🗃️ Remove address from site table
+- [x] ✏️ Resolve typo in model type of scheme
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
 
