@@ -12,7 +12,10 @@ class SiteBase(BaseModel):
     latitude: float
     longitude: float
     model: str = Field(min_length=1, max_length=255)
-    url: str
+    username: str
+    password: str
+    host: str
+    port: str
     line_in: str
     line_out: str
     polygon: str
@@ -30,7 +33,10 @@ class SiteUpdate(SiteBase):
     latitude: float | None  # type: ignore
     longitude: float | None  # type: ignore
     model: float | None  # type: ignore
-    url: str | None  # type: ignore
+    username: str | None  # type: ignore
+    password: str | None  # type: ignore
+    host: str | None  # type: ignore
+    port: str | None  # type: ignore
     line_in: str | None  # type: ignore
     line_out: str | None  # type: ignore
     polygon: str | None  # type: ignore

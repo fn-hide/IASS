@@ -18,12 +18,11 @@ class SVehicle:
         try:
             site = self.ssite.read_site(id)
 
+            url = f"rtsp://{site.username}:{site.password}@{site.host}:{site.port}"
             model = os.path.join(settings.DIR_ASSETS, site.model)
             region_config = eval(site.polygon), eval(site.line_in), eval(site.line_out)
 
-            job = Job(
-                url_stream=site.url, path_model=model, region_config=region_config
-            )
+            job = Job(url_stream=url, path_model=model, region_config=region_config)
             job.start()
 
             JOBS[site.url] = job
