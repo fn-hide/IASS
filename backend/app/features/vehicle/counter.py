@@ -1,9 +1,10 @@
 import threading
-from datetime import datetime
 
 from ultralytics.solutions import ObjectCounter
 from ultralytics.solutions.solutions import SolutionAnnotator, SolutionResults
 from ultralytics.utils.plotting import colors
+
+from app.utils import utcnow
 
 
 class Counter(ObjectCounter):
@@ -17,7 +18,7 @@ class Counter(ObjectCounter):
         track_id: int,
         prev_position: tuple[float, float] | None,
         cls: int,
-    ) -> str:
+    ) -> bool | None:
         """
         Count objects within a polygonal or linear region based on their tracks.
 
@@ -50,23 +51,23 @@ class Counter(ObjectCounter):
                         self.in_count += 1
                         self.classwise_counts[self.names[cls]]["IN"] += 1
                         self.counted_ids.append(track_id)
-                        return "IN"
+                        return False
                     else:  # Moving left
                         self.out_count += 1
                         self.classwise_counts[self.names[cls]]["OUT"] += 1
                         self.counted_ids.append(track_id)
-                        return "OUT"
+                        return True
                 # Horizontal region: Compare y-coordinates to determine direction
                 elif current_centroid[1] > prev_position[1]:  # Moving downward
                     self.in_count += 1
                     self.classwise_counts[self.names[cls]]["IN"] += 1
                     self.counted_ids.append(track_id)
-                    return "IN"
+                    return False
                 else:  # Moving upward
                     self.out_count += 1
                     self.classwise_counts[self.names[cls]]["OUT"] += 1
                     self.counted_ids.append(track_id)
-                    return "OUT"
+                    return True
 
         elif len(self.region) > 2:  # Polygonal region
             if self.r_s.contains(self.Point(current_centroid)):
@@ -87,12 +88,12 @@ class Counter(ObjectCounter):
                     self.in_count += 1
                     self.classwise_counts[self.names[cls]]["IN"] += 1
                     self.counted_ids.append(track_id)
-                    return "IN"
+                    return False
                 else:  # Moving left or upward
                     self.out_count += 1
                     self.classwise_counts[self.names[cls]]["OUT"] += 1
                     self.counted_ids.append(track_id)
-                    return "OUT"
+                    return True
 
     def process(self, im0):
         """
@@ -148,7 +149,7 @@ class Counter(ObjectCounter):
                 self.track_history[track_id][-1], track_id, prev_position, cls
             )  # object counting
             if counted is not None:
-                list_counted.append((track_id, datetime.now(), cls, conf, counted))
+                list_counted.append((track_id, utcnow(), cls, conf, counted))
 
         plot_im = self.annotator.result()
         self.display_counts(plot_im)  # Display the counts on the frame

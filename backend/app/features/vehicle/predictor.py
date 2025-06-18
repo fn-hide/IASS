@@ -2,13 +2,23 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), "development")))
+
 import logging
 import queue
 import time
+from datetime import datetime
 
 import cv2 as cv
 import numpy as np
+from sqlmodel import Session, create_engine
 from ultralytics import checks as ultralytics_checks
+
+from app.core.config import settings
+from app.repositories.r_item import RItem
+from app.repositories.r_user import RUser
+from app.schemas import ItemCreate
+from app.services.s_item import SItem
+from app.services.s_user import SUser
 
 from .counter import Counter as ObjectCounter
 from .state import state
@@ -81,7 +91,10 @@ class Predictor:
                 )
                 with self.counter.lock:
                     result, list_counted = self.counter.process(im1)
-                logger.info(list_counted)
+                if list_counted:
+                    logger.info(list_counted)
+                    for counted in list_counted:
+                        self.commit_item(*counted)
                 im1 = stack_image(
                     frame,
                     result.plot_im,
@@ -114,3 +127,31 @@ class Predictor:
                     break
         if self.verbose:
             cv.destroyAllWindows()
+
+    def commit_item(
+        self,
+        id_track: int,
+        date_stamped: datetime,
+        id_cls: int,
+        conf: float,
+        is_out: bool,
+        is_up=False,
+    ):
+        engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
+
+        with Session(engine) as session:
+            repository = RUser(session)
+            service = SUser(repository)
+            user = service.read_users(skip=0, limit=1)
+
+            repository = RItem(session)
+            service = SItem(repository)
+
+            item = ItemCreate(
+                date_stamped=date_stamped,
+                id_track=id_track,
+                id_cls=id_cls,
+                is_out=is_out,
+                is_up=is_up,
+            )
+            return service.create_item(item, user.data[0].id)
