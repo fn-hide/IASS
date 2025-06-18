@@ -10,6 +10,7 @@ The frontend is built with [Vite](https://vitejs.dev/), [React](https://reactjs.
 - [x] ✨ Add "return to home" link. Replace it with roboflow logo.
 - [x] 💄 Update IASS Banner with smaller size
 - [x] 💄 Update item components
+- [x] ✨ Add sites page
 
 ## Frontend development
 
