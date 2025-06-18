@@ -85,10 +85,10 @@ function ItemsTable() {
           <Table.Row>
             <Table.ColumnHeader w="sm">ID</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Date Created</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Date Stamped</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">ID of Entity</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Is In?</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Is Up?</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Class ID</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Track ID</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Track Type</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Synchronized?</Table.ColumnHeader>
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -101,16 +101,13 @@ function ItemsTable() {
                 {item.date_created}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {item.date_stamped}
+                {item.id_cls}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
                 {item.id_track}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {item.id_cls}
-              </Table.Cell>
-              <Table.Cell truncate maxW="sm">
-                {item.is_out ? 'Yes' : 'No'}
+                {item.is_out ? 'OUT' : 'IN'}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
                 {item.is_up ? 'Yes' : 'No'}
