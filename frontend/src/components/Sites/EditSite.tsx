@@ -31,17 +31,17 @@ interface EditSiteProps {
 }
 
 interface SiteUpdateForm {
-  name: string
-  latitude?: number
-  longitude?: number
-  model?: string
-  line_in?: string
-  line_out?: string
-  polygon?: string
-  username?: string
-  password?: string
-  host?: string
-  port?: string
+  name: string | null
+  latitude: number | null
+  longitude: number | null
+  model: string | null
+  username: string | null
+  password: string | null
+  host: string | null
+  port: string | null
+  line_in: string | null
+  line_out: string | null
+  polygon: string | null
 }
 
 const EditSite = ({ site }: EditSiteProps) => {
@@ -58,8 +58,8 @@ const EditSite = ({ site }: EditSiteProps) => {
     criteriaMode: "all",
     defaultValues: {
       ...site,
-      latitude: site.latitude ?? 0,
-      longitude: site.longitude ?? 0,
+      latitude: site.latitude ?? null,
+      longitude: site.longitude ?? null,
       model: site.model ?? undefined,
       line_in: site.line_in ?? undefined,
       line_out: site.line_out ?? undefined,
@@ -140,6 +140,7 @@ const EditSite = ({ site }: EditSiteProps) => {
                   })}
                   placeholder="Latitude"
                   type="number"
+                  step="any"
                 />
               </Field>
               <Field
@@ -155,6 +156,7 @@ const EditSite = ({ site }: EditSiteProps) => {
                   })}
                   placeholder="Longitude"
                   type="number"
+                  step="any"
                 />
               </Field>
               <Field

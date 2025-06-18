@@ -93,7 +93,7 @@ export type SiteUpdate = {
   name?: string | null
   latitude: number | null
   longitude: number | null
-  model: number | null
+  model: string | null
   username: string | null
   password: string | null
   host: string | null
