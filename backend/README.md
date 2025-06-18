@@ -49,6 +49,7 @@
 - [x] ✨ Add vehicles api and receive the id parameter
 - [x] 🔧 Add directory in pydantic settings
 - [x] 🗃️ Explode url into username, password, host, and port
+- [x] 🗃️ Remove address from site table
 - [ ] 🛂 Add scalable permission between edge and hub
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
 
