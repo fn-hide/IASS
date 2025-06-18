@@ -16,16 +16,18 @@ export type HTTPValidationError = {
 export type ItemCreate = {
   date_created?: string
   date_stamped: string
-  entity_index: number
-  is_in: boolean
+  id_track: number
+  id_cls: number
+  is_out: boolean
   is_up: boolean
 }
 
 export type ItemPublic = {
   date_created?: string
   date_stamped: string
-  entity_index: number
-  is_in: boolean
+  id_track: number
+  id_cls: number
+  is_out: boolean
   is_up: boolean
   id: string
   owner_id: string

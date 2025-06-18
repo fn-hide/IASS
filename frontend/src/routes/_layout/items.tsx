@@ -104,13 +104,16 @@ function ItemsTable() {
                 {item.date_stamped}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {item.entity_index}
+                {item.id_track}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {item.is_in ? 'Yes' : 'No'}
+                {item.id_cls}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {item.is_in ? 'Yes' : 'No'}
+                {item.is_out ? 'Yes' : 'No'}
+              </Table.Cell>
+              <Table.Cell truncate maxW="sm">
+                {item.is_up ? 'Yes' : 'No'}
               </Table.Cell>
             </Table.Row>
           ))}

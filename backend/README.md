@@ -41,11 +41,10 @@
 - [x] 🚚 Organize and rename realtime feature
 - [x] 🚚 Move realtime to vehicle_counter
 - [x] ✨ Add an api for realtime vehicle counter
+- [x] 🗃️ Add track id, rename identity_index, and add track id
+- [x] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
 - [ ] 🛂 Add scalable permission between edge and hub
-- [ ] ♻️ Move `insert_item` logic into `utils` module
-- [ ] 👷 Create different .env for each-edge backend (excluded from git)
 - [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
-- [ ] ✨ Add api to count vehicle from CCTV (site) in real-time (with threads)
 - [ ] ✨ Add auto-clear item if item data is_up and more than 6 hours ago
 
 ## Requirements

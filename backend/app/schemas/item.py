@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlmodel import Field
 
 from app.models.base import BaseModel
+
 from .utils import utcnow
 
 
@@ -11,8 +12,9 @@ from .utils import utcnow
 class ItemBase(BaseModel):
     date_created: datetime = Field(default_factory=utcnow)
     date_stamped: datetime
-    entity_index: int
-    is_in: bool
+    id_track: int
+    id_cls: int
+    is_out: bool
     is_up: bool
 
 

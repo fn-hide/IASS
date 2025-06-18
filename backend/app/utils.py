@@ -201,8 +201,9 @@ async def send_item() -> None:
                 data = {
                     "date_created": str(item.date_created),
                     "date_stamped": str(item.date_stamped),
-                    "entity_index": item.entity_index,
-                    "is_in": item.is_in,
+                    "id_track": item.id_track,
+                    "id_cls": item.id_cls,
+                    "is_out": item.is_out,
                     "is_up": True,
                 }
                 try:

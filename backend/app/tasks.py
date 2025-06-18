@@ -41,8 +41,9 @@ async def insert_item():
         # NOTE: Generate fake data on edge device
         item = ItemCreate(
             date_stamped=utcnow(),
-            entity_index=1,
-            is_in=True,
+            id_track=1,
+            id_cls=1,
+            is_out=True,
             is_up=False,
         )
         return await service.create_item(item, user.data[0].id)
