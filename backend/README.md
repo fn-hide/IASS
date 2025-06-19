@@ -55,6 +55,8 @@
 - [x] 🏷️ Add return type of start job service
 - [x] ✨ Add get by condition in repository
 - [x] ✨ Add model download api
+- [x] 🗃️ Refactor interval ping into sync interval and limit send into sync size
+- [x] 🔧 Refactor default hub name from pangsud into main
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements
