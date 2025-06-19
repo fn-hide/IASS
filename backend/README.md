@@ -53,6 +53,8 @@
 - [x] ✏️ Resolve typo in model type of scheme
 - [x] ✨ Add hubs api
 - [x] 🏷️ Add return type of start job service
+- [x] ✨ Add get by condition in repository
+- [x] ✨ Add model download api
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements

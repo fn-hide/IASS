@@ -1,7 +1,10 @@
+import os
 import uuid
 
 from fastapi import HTTPException
+from fastapi.responses import FileResponse
 
+from app.core.config import settings
 from app.models import Message, Site
 from app.repositories import RSite
 from app.schemas import SiteCreate, SitesPublic, SiteUpdate
@@ -35,3 +38,14 @@ class SSite:
         site_obj = self.read_site(id=id)
         self.repository.delete(site_obj)
         return Message(message="Site deleted successfully")
+
+    def download_model(self) -> FileResponse | Message:
+        site = self.read_sites().data[0]
+        model_path = os.path.join(settings.DIR_ASSETS, site.model)
+        if not os.path.exists(model_path):
+            raise HTTPException(status_code=404, detail="Hub not found")
+        return FileResponse(
+            path=os.path.join(settings.DIR_ASSETS, site.model),
+            filename=site.model,
+            media_type="application/octet-stream",
+        )
