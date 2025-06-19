@@ -11,6 +11,10 @@ class IBase(ABC, Generic[T, ID]):
         ...
 
     @abstractmethod
+    def get_by_condition(self, **conditions) -> T:
+        ...
+
+    @abstractmethod
     def list(self, skip: int = 0, limit: int = 10) -> list[T]:
         ...
 

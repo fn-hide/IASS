@@ -16,6 +16,10 @@ class RBase(IBase[T, ID], Generic[T, ID]):
     def get(self, id: ID) -> T:
         return self.session.get(self.model, id)
 
+    def get_by_condition(self, **conditions) -> T:
+        statement = select(self.model).filter_by(**conditions)
+        return self.session.exec(statement).first()
+
     def list(self, skip=0, limit=0) -> list[T]:
         stmt = select(self.model).offset(skip).limit(limit)
         return self.session.exec(stmt).all()
