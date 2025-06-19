@@ -44,8 +44,8 @@ def init_db(session: Session) -> None:
             longitude=settings.DEFAULT_HUB_LONGITUDE,
             host=settings.DEFAULT_HUB_HOST,
             port=settings.DEFAULT_HUB_PORT,
-            interval_ping=settings.DEFAULT_HUB_INTERVAL_PING,
-            limit_send=settings.DEFAULT_HUB_LIMIT_SEND,
+            sync_interval=settings.DEFAULT_HUB_SYNC_INTERVAL,
+            sync_size=settings.DEFAULT_HUB_SYNC_SIZE,
         )
         repository = RHub(session)
         service = SHub(repository)

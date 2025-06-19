@@ -13,8 +13,8 @@ class HubBase(BaseModel):
     longitude: float
     host: str
     port: str
-    interval_ping: int = Field(ge=1, le=60 * 60 * 24)
-    limit_send: int = Field(ge=1, le=10000)
+    sync_interval: int = Field(ge=1, le=60 * 60 * 24)
+    sync_size: int = Field(ge=1, le=10000)
 
 
 # Properties to receive on item creation
@@ -30,8 +30,8 @@ class HubUpdate(HubBase):
     longitude: float | None  # type: ignore
     host: str | None  # type: ignore
     port: str | None  # type: ignore
-    interval_ping: int | None  # type: ignore
-    limit_send: int | None  # type: ignore
+    sync_interval: int | None  # type: ignore
+    sync_size: int | None  # type: ignore
 
 
 # Properties to return via API, id is always required
