@@ -58,6 +58,7 @@
 - [x] 🗃️ Refactor interval ping into sync interval and limit send into sync size
 - [x] 🔧 Refactor default hub name from pangsud into main
 - [x] 🗃️ Move model column from site into hub
+- [x] 💬 Update model not found message
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements

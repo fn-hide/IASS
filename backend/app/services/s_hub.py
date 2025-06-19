@@ -43,7 +43,9 @@ class SHub:
         hub = self.read_hubs().data[0]
         model_path = os.path.join(settings.DIR_ASSETS, hub.model)
         if not os.path.exists(model_path):
-            raise HTTPException(status_code=404, detail="Hub not found")
+            raise HTTPException(
+                status_code=404, detail=f"Model not found, version: {hub.model}"
+            )
         return FileResponse(
             path=os.path.join(settings.DIR_ASSETS, hub.model),
             filename=hub.model,
