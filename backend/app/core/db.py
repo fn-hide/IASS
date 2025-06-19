@@ -46,6 +46,7 @@ def init_db(session: Session) -> None:
             port=settings.DEFAULT_HUB_PORT,
             sync_interval=settings.DEFAULT_HUB_SYNC_INTERVAL,
             sync_size=settings.DEFAULT_HUB_SYNC_SIZE,
+            model=settings.DEFAULT_HUB_MODEL,
         )
         repository = RHub(session)
         service = SHub(repository)

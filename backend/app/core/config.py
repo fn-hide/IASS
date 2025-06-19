@@ -106,8 +106,9 @@ class Settings(BaseSettings):
     DEFAULT_HUB_LONGITUDE: float
     DEFAULT_HUB_HOST: str
     DEFAULT_HUB_PORT: str
-    DEFAULT_HUB_INTERVAL_PING: int
-    DEFAULT_HUB_LIMIT_SEND: int
+    DEFAULT_HUB_SYNC_INTERVAL: int
+    DEFAULT_HUB_SYNC_SIZE: int
+    DEFAULT_HUB_MODEL: str
 
     def _check_default_secret(self, var_name: str, value: str | None) -> None:
         if value == "changethis":

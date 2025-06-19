@@ -15,6 +15,7 @@ class HubBase(BaseModel):
     port: str
     sync_interval: int = Field(ge=1, le=60 * 60 * 24)
     sync_size: int = Field(ge=1, le=10000)
+    model: str = Field(min_length=1, max_length=255)
 
 
 # Properties to receive on item creation
@@ -32,6 +33,7 @@ class HubUpdate(HubBase):
     port: str | None  # type: ignore
     sync_interval: int | None  # type: ignore
     sync_size: int | None  # type: ignore
+    model: str | None  # type: ignore
 
 
 # Properties to return via API, id is always required

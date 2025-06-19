@@ -57,6 +57,7 @@
 - [x] ✨ Add model download api
 - [x] 🗃️ Refactor interval ping into sync interval and limit send into sync size
 - [x] 🔧 Refactor default hub name from pangsud into main
+- [x] 🗃️ Move model column from site into hub
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements

@@ -33,6 +33,21 @@ def read_hubs(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
 
 
 @router.get(
+    "/download",
+    dependencies=[Depends(get_current_active_superuser)],
+    response_model=HubsPublic,
+)
+def download_model(session: SessionDep) -> Any:
+    """
+    Download sites model.
+    """
+
+    repository = RHub(session=session)
+    service = SHub(repository=repository)
+    return service.download_model()
+
+
+@router.get(
     "/{id}",
     dependencies=[Depends(get_current_active_superuser)],
     response_model=HubPublic,

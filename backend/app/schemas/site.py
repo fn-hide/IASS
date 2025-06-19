@@ -10,7 +10,6 @@ class SiteBase(BaseModel):
     name: str = Field(min_length=1, max_length=255)
     latitude: float
     longitude: float
-    model: str = Field(min_length=1, max_length=255)
     username: str
     password: str
     host: str
@@ -30,7 +29,6 @@ class SiteUpdate(SiteBase):
     name: str | None = Field(default=None, min_length=1, max_length=255)  # type: ignore
     latitude: float | None  # type: ignore
     longitude: float | None  # type: ignore
-    model: str | None  # type: ignore
     username: str | None  # type: ignore
     password: str | None  # type: ignore
     host: str | None  # type: ignore

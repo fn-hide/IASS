@@ -1,7 +1,10 @@
+import os
 import uuid
 
 from fastapi import HTTPException
+from fastapi.responses import FileResponse
 
+from app.core.config import settings
 from app.models import Hub, Message
 from app.repositories import RHub
 from app.schemas import HubCreate, HubsPublic, HubUpdate
@@ -35,3 +38,14 @@ class SHub:
         hub_obj = self.read_hub(id=id)
         self.repository.delete(hub_obj)
         return Message(message="Hub deleted successfully")
+
+    def download_model(self) -> FileResponse | Message:
+        hub = self.read_hubs().data[0]
+        model_path = os.path.join(settings.DIR_ASSETS, hub.model)
+        if not os.path.exists(model_path):
+            raise HTTPException(status_code=404, detail="Hub not found")
+        return FileResponse(
+            path=os.path.join(settings.DIR_ASSETS, hub.model),
+            filename=hub.model,
+            media_type="application/octet-stream",
+        )
