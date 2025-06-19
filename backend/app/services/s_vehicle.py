@@ -14,7 +14,7 @@ class SVehicle:
     def read_jobs(self) -> list[str]:
         return list(JOBS.keys())
 
-    def start_job(self, id: uuid.UUID):
+    def start_job(self, id: uuid.UUID) -> Message:
         try:
             site = self.ssite.read_site(id)
 

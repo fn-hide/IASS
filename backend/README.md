@@ -52,8 +52,8 @@
 - [x] 🗃️ Remove address from site table
 - [x] ✏️ Resolve typo in model type of scheme
 - [x] ✨ Add hubs api
-- [ ] 🛂 Add scalable permission between edge and hub
-- [ ] 👷 Update each-edge backend automatically by pull-build only (in maintenance mode)
+- [x] 🏷️ Add return type of start job service
+- [ ] 👷 Auto-update edge server by git
 
 ## Requirements
 
