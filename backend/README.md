@@ -59,6 +59,7 @@
 - [x] 🔧 Refactor default hub name from pangsud into main
 - [x] 🗃️ Move model column from site into hub
 - [x] 💬 Update model not found message
+- [x] 🔧 Add directories initialization
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements

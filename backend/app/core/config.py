@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     DIR_IASS: str = os.path.abspath(os.path.join(os.getcwd(), ".."))
     DIR_BACKEND: str = os.path.join(DIR_IASS, "backend")
     DIR_ASSETS: str = os.path.join(DIR_BACKEND, "assets")
+    os.makedirs(DIR_ASSETS, exist_ok=True)
 
     API_V1_STR: str = "/api/v1"
     SECRET_KEY: str = secrets.token_urlsafe(32)
