@@ -1,0 +1,13 @@
+[project]
+name = "frontend-dashboard"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "plotly>=6.1.1",
+    "python-dotenv>=1.1.0",
+    "streamlit==1.40",
+    "streamlit-authenticator>=0.4.2",
+    "streamlit-drawable-canvas>=0.9.3",
+]

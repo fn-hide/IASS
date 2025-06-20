@@ -48,3 +48,28 @@ Thumbs.db
 *.mov
 *.wmv
 
+.vscode
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# media
+*.avi
+*.mp4
+*.zip
+
+# asset
+asset/*/
