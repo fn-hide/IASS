@@ -60,6 +60,7 @@
 - [x] 🗃️ Move model column from site into hub
 - [x] 💬 Update model not found message
 - [x] 🔧 Add directories initialization
+- [x] 🔧 Change postgres port inside host from 5432 into 5433
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements
