@@ -67,8 +67,8 @@
 
 ## Requirements
 
-* [Docker](https://www.docker.com/).
-* [uv](https://docs.astral.sh/uv/) for Python package and environment management.
+    * [Docker](https://www.docker.com/).
+    * [uv](https://docs.astral.sh/uv/) for Python package and environment management.
 
 ## Docker Compose
 
@@ -80,15 +80,15 @@ By default, the dependencies are managed with [uv](https://docs.astral.sh/uv/), 
 
 From `./backend/` you can install all the dependencies with:
 
-```console
-$ uv sync
-```
+    ```console
+    $ uv sync
+    ```
 
 Then you can activate the virtual environment with:
 
-```console
-$ source .venv/bin/activate
-```
+    ```console
+    $ source .venv/bin/activate
+    ```
 
 Make sure your editor is using the correct Python virtual environment, with the interpreter at `backend/.venv/bin/python`.
 
@@ -110,43 +110,43 @@ For example, the directory with the backend code is synchronized in the Docker c
 
 There is also a command override that runs `fastapi run --reload` instead of the default `fastapi run`. It starts a single server process (instead of multiple, as would be for production) and reloads the process whenever the code changes. Have in mind that if you have a syntax error and save the Python file, it will break and exit, and the container will stop. After that, you can restart the container by fixing the error and running again:
 
-```console
-$ docker compose watch
-```
+    ```console
+    $ docker compose watch
+    ```
 
 There is also a commented out `command` override, you can uncomment it and comment the default one. It makes the backend container run a process that does "nothing", but keeps the container alive. That allows you to get inside your running container and execute commands inside, for example a Python interpreter to test installed dependencies, or start the development server that reloads when it detects changes.
 
 To get inside the container with a `bash` session you can start the stack with:
 
-```console
-$ docker compose watch
-```
+    ```console
+    $ docker compose watch
+    ```
 
 and then in another terminal, `exec` inside the running container:
 
-```console
-$ docker compose exec backend bash
-```
+    ```console
+    $ docker compose exec backend bash
+    ```
 
 You should see an output like:
 
-```console
-root@7f2607af31c3:/app#
-```
+    ```console
+    root@7f2607af31c3:/app#
+    ```
 
 that means that you are in a `bash` session inside your container, as a `root` user, under the `/app` directory, this directory has another directory called "app" inside, that's where your code lives inside the container: `/app/app`.
 
 There you can use the `fastapi run --reload` command to run the debug live reloading server.
 
-```console
-$ fastapi run --reload app/main.py
-```
+    ```console
+    $ fastapi run --reload app/main.py
+    ```
 
 ...it will look like:
 
-```console
-root@7f2607af31c3:/app# fastapi run --reload app/main.py
-```
+    ```console
+    root@7f2607af31c3:/app# fastapi run --reload app/main.py
+    ```
 
 and then hit enter. That runs the live reloading server that auto reloads when it detects code changes.
 
@@ -158,9 +158,9 @@ Nevertheless, if it doesn't detect a change but a syntax error, it will just sto
 
 To test the backend run:
 
-```console
-$ bash ./scripts/test.sh
-```
+    ```console
+    $ bash ./scripts/test.sh
+    ```
 
 The tests run with Pytest, modify and add tests to `./backend/app/tests/`.
 
@@ -170,17 +170,17 @@ If you use GitHub Actions the tests will run automatically.
 
 If your stack is already up and you just want to run the tests, you can use:
 
-```bash
-docker compose exec backend bash scripts/tests-start.sh
-```
+    ```bash
+    docker compose exec backend bash scripts/tests-start.sh
+    ```
 
 That `/app/scripts/tests-start.sh` script just calls `pytest` after making sure that the rest of the stack is running. If you need to pass extra arguments to `pytest`, you can pass them to that command and they will be forwarded.
 
 For example, to stop on first error:
 
-```bash
-docker compose exec backend bash scripts/tests-start.sh -x
-```
+    ```bash
+    docker compose exec backend bash scripts/tests-start.sh -x
+    ```
 
 ### Test Coverage
 
@@ -192,39 +192,39 @@ As during local development your app directory is mounted as a volume inside the
 
 Make sure you create a "revision" of your models and that you "upgrade" your database with that revision every time you change them. As this is what will update the tables in your database. Otherwise, your application will have errors.
 
-* Start an interactive session in the backend container:
+    * Start an interactive session in the backend container:
 
-```console
-$ docker compose exec backend bash
-```
+    ```console
+    $ docker compose exec backend bash
+    ```
 
-* Alembic is already configured to import your SQLModel models from `./backend/app/models.py`.
+    * Alembic is already configured to import your SQLModel models from `./backend/app/models.py`.
 
-* After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
+    * After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
 
-```console
-$ alembic revision --autogenerate -m "Add column last_name to User model"
-```
+    ```console
+    $ alembic revision --autogenerate -m "Add column last_name to User model"
+    ```
 
-* Commit to the git repository the files generated in the alembic directory.
+    * Commit to the git repository the files generated in the alembic directory.
 
-* After creating the revision, run the migration in the database (this is what will actually change the database):
+    * After creating the revision, run the migration in the database (this is what will actually change the database):
 
-```console
-$ alembic upgrade head
-```
+    ```console
+    $ alembic upgrade head
+    ```
 
 If you don't want to use migrations at all, uncomment the lines in the file at `./backend/app/core/db.py` that end in:
 
-```python
-SQLModel.metadata.create_all(engine)
-```
+    ```python
+    SQLModel.metadata.create_all(engine)
+    ```
 
 and comment the line in the file `scripts/prestart.sh` that contains:
 
-```console
-$ alembic upgrade head
-```
+    ```console
+    $ alembic upgrade head
+    ```
 
 If you don't want to start with the default models and want to remove them / modify them, from the beginning, without having any previous revision, you can remove the revision files (`.py` Python files) under `./backend/app/alembic/versions/`. And then create a first migration as described above.
 
