@@ -63,6 +63,10 @@
 - [x] 🔧 Change postgres port inside host from 5432 into 5433
 - [x] 🐛 Fix missing query of model attribute
 - [x] ➖ Revert dependencies to base requirement without cuda
+- [x] ♻️ Wrap inference in class
+- [ ] ♻️ Use `__call__` magic method instead off `process` method
+- [ ] ✨ Create scallable class to benchmark object counter with mask and save the speed
+- [ ] ⚡️ Use `gstreamer` instead of
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements
