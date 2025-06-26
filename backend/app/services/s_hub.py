@@ -25,6 +25,12 @@ class SHub:
             raise HTTPException(status_code=404, detail="Hub not found")
         return obj
 
+    def read_hub_by_name(self, name: str) -> Hub:
+        obj = self.repository.get_by_condition(name=name)
+        if not obj:
+            raise HTTPException(status_code=404, detail="Hub not found")
+        return obj
+
     def create_hub(self, hub_in: HubCreate, user_id: uuid.UUID) -> Hub:
         obj = Hub.model_validate(hub_in, update={"owner_id": user_id})
         return self.repository.create(obj)
