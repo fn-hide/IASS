@@ -64,6 +64,7 @@
 - [x] 🐛 Fix missing query of model attribute
 - [x] ➖ Revert dependencies to base requirement without cuda
 - [x] ♻️ Wrap inference in class
+- [x] ⚡️ Add crop and mask to be more efficient
 - [ ] ♻️ Use `__call__` magic method instead off `process` method
 - [ ] ✨ Create scallable class to benchmark object counter with mask and save the speed
 - [ ] ⚡️ Use `gstreamer` instead of
