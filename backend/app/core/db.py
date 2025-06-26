@@ -2,10 +2,10 @@ from sqlmodel import Session, create_engine, select
 
 from app import crud
 from app.core.config import settings
-from app.models import Hub, User
-from app.repositories import RHub
-from app.schemas import HubCreate, UserCreate
-from app.services import SHub
+from app.models import Hub, Site, User
+from app.repositories import RHub, RSite
+from app.schemas import HubCreate, SiteCreate, UserCreate
+from app.services import SHub, SSite
 
 engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
 
@@ -51,3 +51,22 @@ def init_db(session: Session) -> None:
         repository = RHub(session)
         service = SHub(repository)
         service.create_hub(hub_in=hub_in, user_id=user.id)
+
+    # --- development --- #
+    site = session.exec(select(Site).where(Site.name == "main")).first()
+    if not site:
+        site_in = SiteCreate(
+            name="main",
+            latitude=0,
+            longitude=0,
+            username="huda",
+            password="Burunghudhud112",
+            host="192.168.50.26",
+            port="554",
+            line_in="[[839, 20], [1157, 1333]]",
+            line_out="[[839, 20], [1157, 1333]]",
+            polygon="[[1157, 72], [1516, 278], [854, 1101], [707, 146]]",
+        )
+        repository = RSite(session)
+        service = SSite(repository)
+        service.create_site(site_in=site_in, user_id=user.id)

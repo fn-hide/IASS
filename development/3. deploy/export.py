@@ -22,10 +22,13 @@ def export(path: str, format: str, name: str, **kwargs):
 
 
 if __name__ == "__main__":
-    export(
-        "./asset/result/data_yolo11m_100/detect/train/weights/best.pt",
-        "onnx",
-        "cpu_nms",
-        device="cpu",
-        nms=True,
-    )
+    # export(
+    #     "./asset/result/data_yolo11m_100/detect/train/weights/best.pt",
+    #     "onnx",
+    #     "cpu_nms",
+    #     device="cpu",
+    #     nms=True,
+    # )
+
+    model = YOLO("./asset/result/data_yolo11m_100/detect/train/weights/best.pt")
+    model.export(format="tflite")

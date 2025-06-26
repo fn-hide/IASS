@@ -1,4 +1,6 @@
-import os
+import os, sys
+sys.path.insert(0, os.getcwd())
+
 from logging.config import fileConfig
 
 from alembic import context
