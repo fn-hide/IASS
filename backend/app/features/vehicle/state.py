@@ -7,6 +7,3 @@ class State:
         self.queue = queue.Queue(maxsize=100)
         self.running = threading.Event()
         self.running.set()
-
-
-state = State()

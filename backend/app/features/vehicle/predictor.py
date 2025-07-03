@@ -21,7 +21,7 @@ from app.services.s_item import SItem
 from app.services.s_user import SUser
 
 from .counter import Counter as ObjectCounter
-from .state import state
+from .state import State
 from .utils import crop_and_mask_image, stack_image
 
 logging.basicConfig(level=logging.INFO)
@@ -31,6 +31,7 @@ logger = logging.getLogger(__name__)
 class Predictor:
     def __init__(
         self,
+        state: State,
         counter: ObjectCounter,
         border_xy: tuple[int, int, int, int],
         line_in: np.ndarray,
@@ -39,6 +40,7 @@ class Predictor:
         is_counter=True,
         verbose=0,
     ):
+        self.state = state
         self.counter = counter
         self.border_xy = border_xy
         self.x_min, self.y_min, self.x_max, self.y_max = border_xy
@@ -75,9 +77,9 @@ class Predictor:
 
         # fps
         prev_time = time.time()
-        while state.running.is_set():
+        while self.state.running.is_set():
             try:
-                frame = state.queue.get(timeout=1)
+                frame = self.state.queue.get(timeout=1)
             except queue.Empty:
                 continue
             if frame is None:
@@ -123,7 +125,7 @@ class Predictor:
                 )
                 cv.imshow("Ultralytics Solutions", im1)
                 if cv.waitKey(1) & 0xFF == ord("q"):
-                    state.running.clear()
+                    self.state.running.clear()
                     break
         if self.verbose:
             cv.destroyAllWindows()

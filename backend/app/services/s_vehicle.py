@@ -15,7 +15,7 @@ class SVehicle:
     def read_jobs(self) -> list[str]:
         return list(JOBS.keys())
 
-    def start_job(self, id: uuid.UUID, verbose=0) -> Message:
+    def create_job(self, id: uuid.UUID, verbose=0) -> Message:
         try:
             hub = self.shub.read_hub_by_name("main")
             site = self.ssite.read_site(id)
@@ -36,3 +36,11 @@ class SVehicle:
         except Exception as e:
             return Message(message=f"Error occured: {e}")
         return Message(message="Job added successfully.")
+
+    def delete_job(self, id: uuid.UUID) -> Message:
+        site = self.ssite.read_site(id)
+        job = JOBS.get(site.id)
+        if not job:
+            return Message(message="Job not found.")
+        job.stop()
+        return Message(message="Job deleted successfully")

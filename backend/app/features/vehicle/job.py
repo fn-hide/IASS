@@ -1,4 +1,5 @@
 import threading
+import uuid
 
 from ultralytics import YOLO
 
@@ -6,6 +7,7 @@ from app.features.vehicle.utils import adjust_site_region
 
 from .counter import Counter as ObjectCounter
 from .predictor import Predictor
+from .state import State
 from .streamer import Streamer
 
 
@@ -17,6 +19,7 @@ class Job:
         self.thread_streamer = None
         self.thread_counter = None
         self.verbose = verbose
+        self.state = State()
 
     def start(self):
         (x_min, y_min, x_max, y_max), polygon, line_in, line_out = adjust_site_region(
@@ -32,8 +35,10 @@ class Job:
             show_out=False,
             line_width=2,
         )
-        streamer = Streamer(self.url_stream, 1, 20)
+
+        streamer = Streamer(self.state, self.url_stream, 1, 20)
         predictor = Predictor(
+            self.state,
             counter,
             (x_min, y_min, x_max, y_max),
             line_in,
@@ -48,11 +53,18 @@ class Job:
         self.thread_streamer.start()
         self.thread_counter.start()
 
-        print(f"✅ Stream started for {self.url_stream}")
+        print(f"💨 Stream started for {self.url_stream}")
+
+    def stop(self):
+        self.state.running.clear()
+        self.thread_streamer.join()
+        self.thread_counter.join()
+
+        print(f"🗑️ Stream deleted for {self.url_stream}")
 
 
 # store running jobs globally
-JOBS = {}
+JOBS: dict[uuid.UUID, Job] = {}
 
 
 if __name__ == "__main__":
