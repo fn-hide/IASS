@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="https://assets.website-files.com/5f6bc60e665f54545a1e52a5/610d3e1407cf0329b8b8ade4_favicon-32x32.png" rel="shortcut icon" type="image/x-icon">
+        <link rel="stylesheet" href="styles.css">
+
+        <title>PolygonZone by Roboflow</title>
+        <meta name="title" content="PolygonZone by Roboflow">
+        <meta name="description" content="Draw polygons on an image and retrieve the coordinates for use in your computer vision projects.">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://roboflow.com/polygonzone">
+        <meta property="og:title" content="PolygonZone by Roboflow">
+        <meta property="og:description" content="Draw polygons on an image and retrieve the coordinates for use in your computer vision projects.">
+        <meta property="og:image" content="https://camo.githubusercontent.com/ee21eb5f43b191dbfd154dfbc26f9ce731f43dc66749ca6cde23557f48136a1a/68747470733a2f2f6d656469612e726f626f666c6f772e636f6d2f6f70656e2d736f757263652f7375706572766973696f6e2f726f626f666c6f772d7375706572766973696f6e2d62616e6e65722e706e673f696b2d73646b2d76657273696f6e3d6a6176617363726970742d312e342e33267570646174656441743d31363734303632383931303838">
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image">
+        <meta property="twitter:url" content="https://roboflow.com/polygonzone">
+        <meta property="twitter:title" content="PolygonZone by Roboflow">
+        <meta property="twitter:description" content="Draw polygons on an image and retrieve the coordinates for use in your computer vision projects.">
+        <meta property="twitter:image" content="https://camo.githubusercontent.com/ee21eb5f43b191dbfd154dfbc26f9ce731f43dc66749ca6cde23557f48136a1a/68747470733a2f2f6d656469612e726f626f666c6f772e636f6d2f6f70656e2d736f757263652f7375706572766973696f6e2f726f626f666c6f772d7375706572766973696f6e2d62616e6e65722e706e673f696b2d73646b2d76657273696f6e3d6a6176617363726970742d312e342e33267570646174656441743d31363734303632383931303838">
+
+        <!-- Fontawesome -->
+        <script src="https://kit.fontawesome.com/1e5ca35699.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <main>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+                                <path fill="#5400ec" d="M261.56 101.28a8 8 0 0 0-11.06 0L66.4 277.15a8 8 0 0 0-2.47 5.79L63.9 448a32 32 0 0 0 32 32H192a16 16 0 0 0 16-16V328a8 8 0 0 1 8-8h80a8 8 0 0 1 8 8v136a16 16 0 0 0 16 16h96.06a32 32 0 0 0 32-32V282.94a8 8 0 0 0-2.47-5.79Z" />
+                                <path fill="#5400ec" d="m490.91 244.15l-74.8-71.56V64a16 16 0 0 0-16-16h-48a16 16 0 0 0-16 16v32l-57.92-55.38C272.77 35.14 264.71 32 256 32c-8.68 0-16.72 3.14-22.14 8.63l-212.7 203.5c-6.22 6-7 15.87-1.34 22.37A16 16 0 0 0 43 267.56L250.5 69.28a8 8 0 0 1 11.06 0l207.52 198.28a16 16 0 0 0 22.59-.44c6.14-6.36 5.63-16.86-.76-22.97" />
+                            </svg>
+                            Back to IASS
+                        </a>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="https://github.com/roboflow/polygonzone" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                                <g fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                                </g>
+                            </svg>
+                            Source Code
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="content">
+                <div class="left">
+                    <div class="how-to section">
+                        <h1>PolygonZone</h1>
+                        <p>PolygonZone lets you calculate polygon points in an image.</p>
+                        <h2>How to use</h2>
+                        <ol class="ta-left">
+                            <li>Drop an image to the indicated area</li>
+                            <li>Select the desired mode: Press <kbd>L</kbd> to draw a line, or <kbd>P</kbd> to draw a polygon</li>
+                            <li>Click to draw polygon points. Press enter to finish the polygon.</li>
+                        </ol>
+                        <h2>Coordinates</h2>
+                        <p>Copy the points below, formatted as NumPy arrays, into your Python code.</p>
+                        <a href="" id="copyPythonButton" class="widgetButton left">Copy Python to Clipboard</a>
+                        <label for="normalize-checkbox">Show Normalized Points from 0-1</label>
+                        <input type="checkbox" id="normalize-checkbox" name="normalize-checkbox" value="normalize-checkbox">
+                        <pre id="python">
+                            <code>
+                            </code>
+                        </pre>
+                        <details>
+                            <summary>View JSON Points</summary>
+                            <h2>JSON Points</h2>
+                            <a href="" id="copyJSONButton" class="widgetButton">Copy JSON to Clipboard</a>
+                            <pre id="json">
+                                <code>
+                                </code>
+                            </pre>
+                        </details>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="taskbar-container">
+                        <div class="tc-container">
+                            <div class="taskbar">
+                                <div class="t-icon t-mode" id="mode-polygon">
+                                    <i class="fa-solid fa-draw-polygon"></i>
+                                    <span class="ti-caption">
+                                        <span>Polygon Mode</span>
+                                        <span>(P)</span>
+                                    </span>
+                                </div>
+                                <div class="t-icon t-mode" id="mode-line">
+                                    <i class="fa-solid fa-lines-leaning"></i>
+                                    <span class="ti-caption">
+                                        <span>Line Mode</span>
+                                        <span>(L)</span>
+                                    </span>
+                                </div>
+                                <div class="t-icon t-mode" id="mode-edit">
+                                    <i class="fa-solid fa-up-down-left-right"></i>
+                                    <span class="ti-caption">
+                                        <span>Edit Mode</span>
+                                        <span>(E)</span>
+                                    </span>
+                                </div>
+                                <div class="t-divider"></div>
+                                <div class="t-icon" id="undo">
+                                    <i class="fa-solid fa-rotate-left"></i>
+                                    <span class="ti-caption">
+                                        <span>Undo</span>
+                                        <span>(Ctrl/⌘-Z)</span>
+                                    </span>
+                                </div>
+                                <div class="t-icon" id="discard-current">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    <span class="ti-caption">
+                                        <span>Discard current</span>
+                                        <span>(Esc)</span>
+                                    </span>
+                                </div>
+                                <div class="t-icon" id="clear">
+                                    <i class="fa-solid fa-trash"></i>
+                                    <span class="ti-caption">
+                                        <span>Clear all polygons</span>
+                                        <span>(Ctrl/⌘-E)</span>
+                                    </span>
+                                </div>
+                                <div class="t-divider"></div>
+                                <div class="t-icon" id="save-image">
+                                    <i class="fa-solid fa-floppy-disk"></i>
+                                    <span class="ti-caption">
+                                        <span>Save image</span>
+                                        <span>(Ctrl/⌘-S)</span>
+                                    </span>
+                                </div>
+                                <div class="t-icon" id="fullscreen">
+                                    <i class="fa-solid fa-expand"></i>
+                                    <span class="ti-caption">
+                                        <span>Fullscreen</span>
+                                        <span>(F)</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="coordinates">
+                                <span class="cc-title">Coordinates</span>
+                                <span>
+                                    <span class="cc-coord">x: <span class="cc-value" id="x">---</span> | </span>
+                                    <span class="cc-coord">y: <span class="cc-value" id="y">---</span></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-container">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>
