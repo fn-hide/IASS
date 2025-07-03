@@ -26,6 +26,7 @@ dependencies = [
     "numpy==1.26.4",
     # "onnxruntime-gpu==1.18.0",
     "ultralytics>=8.3.74",
+    "clip @ git+https://github.com/ultralytics/CLIP.git"
 ]
 
 [dependency-groups]

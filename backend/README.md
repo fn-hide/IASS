@@ -71,6 +71,7 @@
 - [x] ✨ Add feature to remove running thread of vehicle counting
 - [x] 🔧 Back to the original configuration
 - [x] ➕ Add opencv dependencies
+- [x] ➕ Add ultralytics dependencies
 - [ ] ♻️ Use `__call__` magic method instead off `process` method
 - [ ] ✨ Create scallable class to benchmark object counter with mask and save the speed
 - [ ] ⚡️ Use `gstreamer` instead of
