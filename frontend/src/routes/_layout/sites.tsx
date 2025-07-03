@@ -116,9 +116,6 @@ function SitesTable() {
                 {site.longitude}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {site.model}
-              </Table.Cell>
-              <Table.Cell truncate maxW="sm">
                 {site.line_in}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">

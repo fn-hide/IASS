@@ -48,6 +48,7 @@ const AddHub = () => {
       port: "",
       limit_send: 0,
       interval_ping: 0,
+      model: "",
     },
   })
 
@@ -210,6 +211,21 @@ const AddHub = () => {
                   })}
                   placeholder="Health check interval"
                   type="number"
+                />
+              </Field>
+              <Field
+                required
+                invalid={!!errors.model}
+                errorText={errors.model?.message}
+                label="Model"
+              >
+                <Input
+                  id="model"
+                  {...register("model", {
+                    required: "Model is required.",
+                  })}
+                  placeholder="Model"
+                  type="text"
                 />
               </Field>
             </VStack>

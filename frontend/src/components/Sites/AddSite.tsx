@@ -43,7 +43,6 @@ const AddSite = () => {
       name: "",
       latitude: 0,
       longitude: 0,
-      model: "",
       line_in: "",
       line_out: "",
       polygon: "",
@@ -138,21 +137,6 @@ const AddSite = () => {
                   })}
                   placeholder="Longitude"
                   type="number"
-                />
-              </Field>
-              <Field
-                required
-                invalid={!!errors.model}
-                errorText={errors.model?.message}
-                label="Model"
-              >
-                <Input
-                  id="model"
-                  {...register("model", {
-                    required: "Model is required.",
-                  })}
-                  placeholder="Model"
-                  type="text"
                 />
               </Field>
               <Field

@@ -60,7 +60,6 @@ const EditSite = ({ site }: EditSiteProps) => {
       ...site,
       latitude: site.latitude ?? null,
       longitude: site.longitude ?? null,
-      model: site.model ?? undefined,
       line_in: site.line_in ?? undefined,
       line_out: site.line_out ?? undefined,
       polygon: site.polygon ?? undefined,
@@ -157,21 +156,6 @@ const EditSite = ({ site }: EditSiteProps) => {
                   placeholder="Longitude"
                   type="number"
                   step="any"
-                />
-              </Field>
-              <Field
-                required
-                invalid={!!errors.model}
-                errorText={errors.model?.message}
-                label="Model"
-              >
-                <Input
-                  id="model"
-                  {...register("model", {
-                    required: "Model is required.",
-                  })}
-                  placeholder="Model"
-                  type="text"
                 />
               </Field>
               <Field

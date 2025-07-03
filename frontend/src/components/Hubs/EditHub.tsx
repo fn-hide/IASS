@@ -62,6 +62,7 @@ const EditHub = ({ hub }: EditHubProps) => {
       port: hub.port ?? undefined,
       limit_send: hub.limit_send ?? null,
       interval_ping: hub.interval_ping ?? null,
+      model: hub.model ?? undefined,
     },
   })
 
@@ -224,6 +225,21 @@ const EditHub = ({ hub }: EditHubProps) => {
                   })}
                   placeholder="Health check interval"
                   type="number"
+                />
+              </Field>
+              <Field
+                required
+                invalid={!!errors.model}
+                errorText={errors.model?.message}
+                label="Model"
+              >
+                <Input
+                  id="model"
+                  {...register("model", {
+                    required: "Model is required.",
+                  })}
+                  placeholder="Model"
+                  type="text"
                 />
               </Field>
             </VStack>
