@@ -20,8 +20,9 @@ export type HubCreate = {
   longitude: number
   host: string
   port: string
-  interval_ping: number
-  limit_send: number
+  sync_interval: number
+  sync_size: number
+  model: string
 }
 
 export type HubPublic = {
@@ -31,8 +32,9 @@ export type HubPublic = {
   longitude: number
   host: string
   port: string
-  interval_ping: number
-  limit_send: number
+  sync_interval: number
+  sync_size: number
+  model: string
   id: string
   owner_id: string
 }
@@ -49,8 +51,9 @@ export type HubUpdate = {
   longitude: number | null
   host: string | null
   port: string | null
-  interval_ping: number | null
-  limit_send: number | null
+  sync_interval: number | null
+  sync_size: number | null
+  model: string | null
 }
 
 export type ItemCreate = {
@@ -98,7 +101,6 @@ export type SiteCreate = {
   name: string
   latitude: number
   longitude: number
-  model: string
   username: string
   password: string
   host: string
@@ -112,7 +114,6 @@ export type SitePublic = {
   name: string
   latitude: number
   longitude: number
-  model: string
   username: string
   password: string
   host: string
@@ -133,7 +134,6 @@ export type SiteUpdate = {
   name?: string | null
   latitude: number | null
   longitude: number | null
-  model: string | null
   username: string | null
   password: string | null
   host: string | null
@@ -211,6 +211,8 @@ export type HubsCreateHubData = {
 }
 
 export type HubsCreateHubResponse = HubPublic
+
+export type HubsDownloadModelResponse = HubsPublic
 
 export type HubsReadHubData = {
   id: string
@@ -386,8 +388,15 @@ export type UtilsHealthCheckResponse = boolean
 
 export type VehiclesReadJobsResponse = unknown
 
-export type VehiclesStartJobData = {
+export type VehiclesCreateJobData = {
+  id: string
+  verbose?: number
+}
+
+export type VehiclesCreateJobResponse = unknown
+
+export type VehiclesDeleteJobData = {
   id: string
 }
 
-export type VehiclesStartJobResponse = unknown
+export type VehiclesDeleteJobResponse = Message

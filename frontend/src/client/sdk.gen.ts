@@ -8,6 +8,7 @@ import type {
   HubsReadHubsResponse,
   HubsCreateHubData,
   HubsCreateHubResponse,
+  HubsDownloadModelResponse,
   HubsReadHubData,
   HubsReadHubResponse,
   HubsUpdateHubData,
@@ -66,8 +67,10 @@ import type {
   UtilsTestEmailResponse,
   UtilsHealthCheckResponse,
   VehiclesReadJobsResponse,
-  VehiclesStartJobData,
-  VehiclesStartJobResponse,
+  VehiclesCreateJobData,
+  VehiclesCreateJobResponse,
+  VehiclesDeleteJobData,
+  VehiclesDeleteJobResponse,
 } from "./types.gen"
 
 export class HubsService {
@@ -115,6 +118,19 @@ export class HubsService {
       errors: {
         422: "Validation Error",
       },
+    })
+  }
+
+  /**
+   * Download Model
+   * Download sites model.
+   * @returns HubsPublic Successful Response
+   * @throws ApiError
+   */
+  public static downloadModel(): CancelablePromise<HubsDownloadModelResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/hubs/download",
     })
   }
 
@@ -809,24 +825,51 @@ export class VehiclesService {
   public static readJobs(): CancelablePromise<VehiclesReadJobsResponse> {
     return __request(OpenAPI, {
       method: "GET",
-      url: "/api/v1/vehicles/jobs",
+      url: "/api/v1/vehicles/",
     })
   }
 
   /**
-   * Start Job
-   * Start a specific "job" i.e. vehicle counting.
+   * Create Job
+   * Create a new job.
    * @param data The data for the request.
    * @param data.id
+   * @param data.verbose
    * @returns unknown Successful Response
    * @throws ApiError
    */
-  public static startJob(
-    data: VehiclesStartJobData,
-  ): CancelablePromise<VehiclesStartJobResponse> {
+  public static createJob(
+    data: VehiclesCreateJobData,
+  ): CancelablePromise<VehiclesCreateJobResponse> {
     return __request(OpenAPI, {
       method: "POST",
-      url: "/api/v1/vehicles/{id}/start",
+      url: "/api/v1/vehicles/{id}",
+      path: {
+        id: data.id,
+      },
+      query: {
+        verbose: data.verbose,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Job
+   * Delete a job.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteJob(
+    data: VehiclesDeleteJobData,
+  ): CancelablePromise<VehiclesDeleteJobResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/vehicles/{id}",
       path: {
         id: data.id,
       },
