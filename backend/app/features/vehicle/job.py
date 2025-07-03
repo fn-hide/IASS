@@ -10,12 +10,13 @@ from .streamer import Streamer
 
 
 class Job:
-    def __init__(self, url_stream: str, path_model: str, region_config):
+    def __init__(self, url_stream: str, path_model: str, region_config, verbose=0):
         self.url_stream = url_stream
         self.path_model = path_model
         self.region_config = region_config
         self.thread_streamer = None
         self.thread_counter = None
+        self.verbose = verbose
 
     def start(self):
         (x_min, y_min, x_max, y_max), polygon, line_in, line_out = adjust_site_region(
@@ -33,7 +34,12 @@ class Job:
         )
         streamer = Streamer(self.url_stream, 1, 20)
         predictor = Predictor(
-            counter, (x_min, y_min, x_max, y_max), line_in, line_out, polygon, verbose=1
+            counter,
+            (x_min, y_min, x_max, y_max),
+            line_in,
+            line_out,
+            polygon,
+            verbose=self.verbose,
         )
 
         self.thread_streamer = threading.Thread(target=streamer.run, daemon=True)

@@ -27,7 +27,7 @@ def read_jobs() -> Any:
     "/{id}/start",
     dependencies=[Depends(get_current_active_superuser)],
 )
-def start_job(session: SessionDep, id: uuid.UUID) -> Any:
+def start_job(session: SessionDep, id: uuid.UUID, verbose: int = 0) -> Any:
     """
     Start a specific "job" i.e. vehicle counting.
     """
@@ -39,4 +39,4 @@ def start_job(session: SessionDep, id: uuid.UUID) -> Any:
     ssite = SSite(rsite)
 
     svehicle = SVehicle(shub, ssite)
-    return svehicle.start_job(id)
+    return svehicle.start_job(id, verbose)

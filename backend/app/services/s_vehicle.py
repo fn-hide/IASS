@@ -15,7 +15,7 @@ class SVehicle:
     def read_jobs(self) -> list[str]:
         return list(JOBS.keys())
 
-    def start_job(self, id: uuid.UUID) -> Message:
+    def start_job(self, id: uuid.UUID, verbose=0) -> Message:
         try:
             hub = self.shub.read_hub_by_name("main")
             site = self.ssite.read_site(id)
@@ -24,7 +24,12 @@ class SVehicle:
             model = os.path.join(settings.DIR_ASSETS, hub.model)
             region_config = eval(site.polygon), eval(site.line_in), eval(site.line_out)
 
-            job = Job(url_stream=url, path_model=model, region_config=region_config)
+            job = Job(
+                url_stream=url,
+                path_model=model,
+                region_config=region_config,
+                verbose=verbose,
+            )
             job.start()
 
             JOBS[url] = job
