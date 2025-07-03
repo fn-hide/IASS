@@ -23,7 +23,7 @@ dependencies = [
     "sentry-sdk[fastapi]<2.0.0,>=1.40.6",
     "pyjwt<3.0.0,>=2.8.0",
     "fastapi-utils[all]>=0.8.0",
-    "numpy==1.26.4",
+    "numpy==2.2.6",
     # "onnxruntime-gpu==1.18.0",
     "ultralytics>=8.3.74",
     "clip @ git+https://github.com/ultralytics/CLIP.git"
