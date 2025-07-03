@@ -28,8 +28,8 @@ Deployed on the **central server**. Has full access and acts as **superadmin**. 
 
 Deployed on **edge devices** (e.g., CCTV locations). Responsible for:
 
-  * Local vehicle detection.
-  * Sending data to the Super Hub.
+* Local vehicle detection.
+* Sending data to the Super Hub.
 
 It Cannot be managed by normal users — only **syncs data to Super Hub**. Has a local **superuser**, but when syncing to the Super Hub, it behaves as a **normal user**.
 
@@ -50,13 +50,13 @@ It Cannot be managed by normal users — only **syncs data to Super Hub**. Has a
 
 A **Site** represents a **CCTV unit** registered under an Edge Hub. Each Edge Hub has **at least one Site**. When a Site is registered:
 
-  * It is also synced to the Super Hub with the associated `owner_id`.
-  * Stored in the `site` table in both Edge and Super Hub.
+* It is also synced to the Super Hub with the associated `owner_id`.
+* Stored in the `site` table in both Edge and Super Hub.
 
 Useful for:
 
-  * Managing multiple CCTVs under a single Edge Hub.
-  * Tracking data based on physical location.
+* Managing multiple CCTVs under a single Edge Hub.
+* Tracking data based on physical location.
 
 ### 🔄 Data Sync & Distribution
 
@@ -68,10 +68,12 @@ Currently, there is only **one Super Hub** in the system. Future versions may su
 
 ## 📃 Documentations
 
-- Backend: [Documentation](./backend/README.md).
-- Frontend: [Documentation](./frontend/README.md).
-- Frontend Dashboard: [Documentation](./frontend_dashboard/README.md).
-- Development: [Development](./development/README.md).
+* *Modelling: [Modelling](./modelling/README.md).
+* *Backend: [Documentation](./backend/README.md).
+* *Frontend: [Documentation](./frontend/README.md).
+* *Development: [Development](./development.md).
+* *Deployment: [Deployment](./deployment.md).
+* *Frontend Dashboard: [Documentation](./frontend_dashboard/README.md).
 
 ## Release Notes
 
