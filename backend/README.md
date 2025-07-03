@@ -69,6 +69,7 @@
 - [x] ✨ Add verbose as parameter for debugging purpose
 - [x] ♻️ Change site url into site id as key of JOBS
 - [x] ✨ Add feature to remove running thread of vehicle counting
+- [x] 🔧 Back to the original configuration
 - [ ] ♻️ Use `__call__` magic method instead off `process` method
 - [ ] ✨ Create scallable class to benchmark object counter with mask and save the speed
 - [ ] ⚡️ Use `gstreamer` instead of
