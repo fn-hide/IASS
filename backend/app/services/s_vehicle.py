@@ -27,7 +27,7 @@ class SVehicle:
             job = Job(url_stream=url, path_model=model, region_config=region_config)
             job.start()
 
-            JOBS[site.url] = job
+            JOBS[url] = job
         except Exception as e:
             return Message(message=f"Error occured: {e}")
         return Message(message="Job added successfully.")
