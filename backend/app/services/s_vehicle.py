@@ -32,7 +32,7 @@ class SVehicle:
             )
             job.start()
 
-            JOBS[url] = job
+            JOBS[site.id] = job
         except Exception as e:
             return Message(message=f"Error occured: {e}")
         return Message(message="Job added successfully.")
