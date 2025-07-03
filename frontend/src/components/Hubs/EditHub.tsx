@@ -37,8 +37,9 @@ interface HubUpdateForm {
   longitude: number | null
   host: string | null
   port: string | null
-  limit_send: number | null
-  interval_ping: number | null
+  sync_interval: number | null
+  sync_size: number | null
+  model: string | null
 }
 
 const EditHub = ({ hub }: EditHubProps) => {
@@ -60,8 +61,8 @@ const EditHub = ({ hub }: EditHubProps) => {
       longitude: hub.longitude ?? null,
       host: hub.host ?? undefined,
       port: hub.port ?? undefined,
-      limit_send: hub.limit_send ?? null,
-      interval_ping: hub.interval_ping ?? null,
+      sync_interval: hub.sync_interval ?? null,
+      sync_size: hub.sync_size ?? null,
       model: hub.model ?? undefined,
     },
   })
@@ -199,13 +200,13 @@ const EditHub = ({ hub }: EditHubProps) => {
               </Field>
               <Field
                 required
-                invalid={!!errors.limit_send}
-                errorText={errors.limit_send?.message}
+                invalid={!!errors.sync_size}
+                errorText={errors.sync_size?.message}
                 label="Synchronize limit"
               >
                 <Input
-                  id="limit_send"
-                  {...register("limit_send", {
+                  id="sync_size"
+                  {...register("sync_size", {
                     required: "Synchronize limit is required.",
                   })}
                   placeholder="Synchronize limit"
@@ -214,13 +215,13 @@ const EditHub = ({ hub }: EditHubProps) => {
               </Field>
               <Field
                 required
-                invalid={!!errors.interval_ping}
-                errorText={errors.interval_ping?.message}
+                invalid={!!errors.sync_interval}
+                errorText={errors.sync_interval?.message}
                 label="Health check interval"
               >
                 <Input
-                  id="interval_ping"
-                  {...register("interval_ping", {
+                  id="sync_interval"
+                  {...register("sync_interval", {
                     required: "Health check interval is required.",
                   })}
                   placeholder="Health check interval"

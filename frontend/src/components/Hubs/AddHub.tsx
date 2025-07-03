@@ -46,8 +46,8 @@ const AddHub = () => {
       longitude: 0,
       host: "",
       port: "",
-      limit_send: 0,
-      interval_ping: 0,
+      sync_size: 0,
+      sync_interval: 0,
       model: "",
     },
   })
@@ -185,13 +185,13 @@ const AddHub = () => {
               </Field>
               <Field
                 required
-                invalid={!!errors.limit_send}
-                errorText={errors.limit_send?.message}
+                invalid={!!errors.sync_size}
+                errorText={errors.sync_size?.message}
                 label="Synchronize limit"
               >
                 <Input
-                  id="limit_send"
-                  {...register("limit_send", {
+                  id="sync_size"
+                  {...register("sync_size", {
                     required: "Synchronize limit is required.",
                   })}
                   placeholder="Synchronize limit"
@@ -200,13 +200,13 @@ const AddHub = () => {
               </Field>
               <Field
                 required
-                invalid={!!errors.interval_ping}
-                errorText={errors.interval_ping?.message}
+                invalid={!!errors.sync_interval}
+                errorText={errors.sync_interval?.message}
                 label="Health check interval"
               >
                 <Input
-                  id="interval_ping"
-                  {...register("interval_ping", {
+                  id="sync_interval"
+                  {...register("sync_interval", {
                     required: "Health check interval is required.",
                   })}
                   placeholder="Health check interval"

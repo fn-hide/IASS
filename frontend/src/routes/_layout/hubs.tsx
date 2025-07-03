@@ -92,8 +92,8 @@ function HubsTable() {
             <Table.ColumnHeader w="sm">Longitude</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Host</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Port</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Sync Limit</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Check Interval</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Sync Size</Table.ColumnHeader>
+            <Table.ColumnHeader w="sm">Sync Interval</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Model</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Actions</Table.ColumnHeader>
           </Table.Row>
@@ -123,10 +123,10 @@ function HubsTable() {
                 {hub.port}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {hub.limit_send}
+                {hub.sync_size}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
-                {hub.interval_ping}
+                {hub.sync_interval}
               </Table.Cell>
               <Table.Cell truncate maxW="sm">
                 {hub.model}

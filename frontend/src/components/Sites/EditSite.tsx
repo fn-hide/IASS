@@ -34,7 +34,6 @@ interface SiteUpdateForm {
   name: string | null
   latitude: number | null
   longitude: number | null
-  model: string | null
   username: string | null
   password: string | null
   host: string | null

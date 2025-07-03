@@ -89,7 +89,6 @@ function SitesTable() {
             <Table.ColumnHeader w="sm">Name</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Latitude</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Longitude</Table.ColumnHeader>
-            <Table.ColumnHeader w="sm">Model</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Line In</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Line Out</Table.ColumnHeader>
             <Table.ColumnHeader w="sm">Polygon</Table.ColumnHeader>

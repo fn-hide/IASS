@@ -15,6 +15,7 @@ The frontend is built with [Vite](https://vitejs.dev/), [React](https://reactjs.
 - [x] ✨ Add hubs page
 - [x] 🐛 Resolve missing default values of hubs
 - [x] ♻️ Move model from site into hub
+- [x] ♻️ Update sync size and sync interval
 
 ## Frontend development
 
