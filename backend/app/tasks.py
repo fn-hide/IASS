@@ -1,11 +1,9 @@
 from fastapi_utils.tasks import repeat_every
-from sqlmodel import Session, create_engine
 
-from app.core.config import settings
+from app.jobs import create_edge_user, get_db, is_hub_up, send_item
 from app.main import app
 from app.repositories.r_item import RItem
 from app.services.s_item import SItem
-from app.utils import create_edge_user, is_hub_up, send_item
 
 
 @app.on_event("startup")
@@ -24,8 +22,7 @@ async def ping_hub():
 @app.on_event("startup")
 @repeat_every(seconds=1)
 async def insert_item():
-    engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
-    with Session(engine) as session:
+    with get_db() as session:
         repository = RItem(session)
         service = SItem(repository)
 

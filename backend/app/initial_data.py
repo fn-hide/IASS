@@ -5,16 +5,15 @@ sys.path.insert(0, os.getcwd())
 
 import logging
 
-from sqlmodel import Session
-
-from app.core.db import engine, init_db
+from app.core.db import get_db
+from app.core.initial import init_db
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
 def init() -> None:
-    with Session(engine) as session:
+    with get_db() as session:
         init_db(session)
 
 

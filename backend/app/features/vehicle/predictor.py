@@ -10,10 +10,9 @@ from datetime import datetime
 
 import cv2 as cv
 import numpy as np
-from sqlmodel import Session, create_engine
 from ultralytics import checks as ultralytics_checks
 
-from app.core.config import settings
+from app.core.db import get_db
 from app.repositories.r_item import RItem
 from app.repositories.r_user import RUser
 from app.schemas import ItemCreate
@@ -139,9 +138,7 @@ class Predictor:
         is_out: bool,
         is_up=False,
     ):
-        engine = create_engine(str(settings.SQLALCHEMY_DATABASE_URI))
-
-        with Session(engine) as session:
+        with get_db() as session:
             repository = RUser(session)
             service = SUser(repository)
             user = service.read_users(skip=0, limit=1)

@@ -77,6 +77,7 @@
 - [x] ➕ Add clip and openvino for production
 - [x] ➕ Add plotly, nbformat, and seaborn for development
 - [x] ⚗️ Generate coral fps over time
+- [x] 🧵 Fix database engine creation
 - [ ] Refactor run app with fastapi to uvicorn
 - [ ] Comment tasks for main server
 - [ ] ♻️ Use `__call__` magic method instead off `process` method
