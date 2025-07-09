@@ -26,7 +26,8 @@ dependencies = [
     "numpy==1.26.4",
     # "onnxruntime-gpu==1.18.0",
     "ultralytics>=8.3.74",
-    "clip @ git+https://github.com/ultralytics/CLIP.git"
+    "clip @ git+https://github.com/ultralytics/CLIP.git",
+    "openvino>=2024.0.0",
 ]
 
 [dependency-groups]
@@ -51,6 +52,9 @@ dev = [
     # "markupsafe==3.0.2",
     # "torchvision>=0.22.1",
     # "torchaudio>=2.7.1",
+    "plotly>=6.2.0",
+    "nbformat>=5.10.4",
+    "seaborn>=0.13.2",
 ]
 
 # [tool.uv.sources]

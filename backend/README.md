@@ -74,6 +74,10 @@
 - [x] ➕ Add ultralytics dependencies
 - [x] 📝 Add preparation
 - [x] 📝 Improve markdown
+- [x] ➕ Add clip and openvino for production
+- [x] ➕ Add plotly, nbformat, and seaborn for development
+- [ ] Refactor run app with fastapi to uvicorn
+- [ ] Comment tasks for main server
 - [ ] ♻️ Use `__call__` magic method instead off `process` method
 - [ ] ✨ Create scallable class to benchmark object counter with mask and save the speed
 - [ ] ⚡️ Use `gstreamer` instead of
