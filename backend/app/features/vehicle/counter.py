@@ -152,8 +152,8 @@ class Counter(ObjectCounter):
                 list_counted.append((track_id, utcnow(), cls, conf, counted))
 
         plot_im = self.annotator.result()
-        self.display_counts(plot_im)  # Display the counts on the frame
-        self.display_output(plot_im)  # Display output with base class function
+        # self.display_counts(plot_im)  # Display the counts on the frame
+        # self.display_output(plot_im)  # Display output with base class function
 
         # Return SolutionResults
         return SolutionResults(

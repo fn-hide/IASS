@@ -57,12 +57,12 @@ class Predictor:
             logger.info(ultralytics_checks())
 
     def display_counts(self, plot_im: np.ndarray, show_in=True, show_out=True):
-        """Override ObjectCounter display_counts"""
+        """Custom ObjectCounter display_counts in Predictor"""
         labels_dict = {
             str.capitalize(key): f"{'IN ' + str(value['IN']) if show_in else ''} "
             f"{'OUT ' + str(value['OUT']) if show_out else ''}".strip()
             for key, value in self.counter.classwise_counts.items()
-            if value["IN"] != 0 or value["OUT"] != 0
+            if value["IN"] != 0 or value["OUT"] != 0 and (show_in or show_out)
         }
         if labels_dict:
             self.counter.annotator.display_analytics(
