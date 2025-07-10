@@ -12,14 +12,18 @@ from .streamer import Streamer
 
 
 class Job:
-    def __init__(self, url_stream: str, path_model: str, region_config, verbose=0):
+    def __init__(
+        self, url_stream: str, path_model: str, region_config, is_stream=0, verbose=0
+    ):
         self.url_stream = url_stream
         self.path_model = path_model
         self.region_config = region_config
         self.thread_streamer = None
         self.thread_counter = None
+        self.is_stream = is_stream
         self.verbose = verbose
         self.state = State()
+        self.buffer = State()
 
     def start(self):
         (x_min, y_min, x_max, y_max), polygon, line_in, line_out = adjust_site_region(
@@ -39,11 +43,13 @@ class Job:
         streamer = Streamer(self.state, self.url_stream, 1, 20)
         predictor = Predictor(
             self.state,
+            self.buffer,
             counter,
             (x_min, y_min, x_max, y_max),
             line_in,
             line_out,
             polygon,
+            is_stream=self.is_stream,
             verbose=self.verbose,
         )
 
@@ -55,10 +61,12 @@ class Job:
 
         print(f"💨 Stream started for {self.url_stream}")
 
-    def stop(self):
+    def stop(self, id: uuid.UUID):
         self.state.running.clear()
+        self.buffer.running.clear()
         self.thread_streamer.join()
         self.thread_counter.join()
+        del JOBS[id]
 
         print(f"🗑️ Stream deleted for {self.url_stream}")
 

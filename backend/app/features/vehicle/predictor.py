@@ -31,15 +31,18 @@ class Predictor:
     def __init__(
         self,
         state: State,
+        buffer: State,
         counter: ObjectCounter,
         border_xy: tuple[int, int, int, int],
         line_in: np.ndarray,
         line_out: np.ndarray,
         polygon: np.ndarray,
         is_counter=True,
+        is_stream=True,
         verbose=0,
     ):
         self.state = state
+        self.buffer = buffer
         self.counter = counter
         self.border_xy = border_xy
         self.x_min, self.y_min, self.x_max, self.y_max = border_xy
@@ -47,6 +50,7 @@ class Predictor:
         self.line_out = line_out
         self.polygon = polygon
         self.is_counter = is_counter
+        self.is_stream = is_stream
         self.verbose = verbose
 
         if self.verbose:
@@ -70,10 +74,6 @@ class Predictor:
             )
 
     def run(self):
-        # show
-        if self.verbose:
-            cv.namedWindow("Ultralytics Solutions", cv.WINDOW_NORMAL)
-
         # fps
         prev_time = time.time()
         while self.state.running.is_set():
@@ -90,12 +90,41 @@ class Predictor:
                 im1 = crop_and_mask_image(
                     im1, self.x_min, self.y_min, self.x_max, self.y_max, self.polygon
                 )
+
+                # track and predict
                 with self.counter.lock:
-                    result, list_counted = self.counter.process(im1)
+                    with self.counter.profilers[1]:
+                        result, list_counted = self.counter.process(im1)
+
+                    # show solution speed
+                    track_or_predict = (
+                        "predict"
+                        if type(self.counter).__name__ == "ObjectCropper"
+                        else "track"
+                    )
+                    track_or_predict_speed = self.counter.profilers[0].dt * 1e3
+                    solution_speed = (
+                        self.counter.profilers[1].dt - self.counter.profilers[0].dt
+                    ) * 1e3  # solution time = process - track
+                    result.speed = {
+                        track_or_predict: track_or_predict_speed,
+                        "solution": solution_speed,
+                    }
+                    if self.verbose:
+                        self.counter.frame_no += 1
+                        logger.info(
+                            f"{self.counter.frame_no}: {result.plot_im.shape[0]}x{result.plot_im.shape[1]} {solution_speed:.1f}ms\n"
+                            f"Speed: {track_or_predict_speed:.1f}ms {track_or_predict}, "
+                            f"{solution_speed:.1f}ms solution per image at shape "
+                            f"(1, {getattr(self.counter.model, 'ch', 3)}, {result.plot_im.shape[0]}, {result.plot_im.shape[1]})\n"
+                        )
+                # save item into database
                 if list_counted:
                     logger.info(list_counted)
                     for counted in list_counted:
                         self.commit_item(*counted)
+
+                # re-construct cropped frame into original frame
                 im1 = stack_image(
                     frame,
                     result.plot_im,
@@ -105,14 +134,10 @@ class Predictor:
                     self.y_max,
                 )
 
-            # fps
-            curr_time = time.time()
-            fps = 1 / (curr_time - prev_time)
-            prev_time = curr_time
-
-            # show
-            if self.verbose:
-                self.display_counts(im1)
+                # add fps
+                curr_time = time.time()
+                fps = 1 / (curr_time - prev_time)
+                prev_time = curr_time
                 cv.putText(
                     im1,
                     f"FPS: {fps:.0f}",
@@ -122,12 +147,18 @@ class Predictor:
                     (0, 255, 0),
                     3,
                 )
-                cv.imshow("Ultralytics Solutions", im1)
-                if cv.waitKey(1) & 0xFF == ord("q"):
-                    self.state.running.clear()
-                    break
-        if self.verbose:
-            cv.destroyAllWindows()
+
+                # add counts
+                self.display_counts(im1)
+
+                # save frame as bytes for streaming
+                if self.is_stream:
+                    try:
+                        _, buffer = cv.imencode(".jpg", frame)
+                        frame_bytes = buffer.tobytes()
+                        self.buffer.queue.put(frame_bytes, timeout=1)
+                    except queue.Full:
+                        logger.warning("⚠️ Queue full, dropping frame..")
 
     def commit_item(
         self,

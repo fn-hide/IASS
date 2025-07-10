@@ -2,6 +2,7 @@ import uuid
 from typing import Any
 
 from fastapi import APIRouter, Depends
+from fastapi.responses import StreamingResponse
 
 from app.api.deps import SessionDep, get_current_active_superuser
 from app.models import Message
@@ -24,11 +25,32 @@ def read_jobs() -> Any:
     return svehicle.read_jobs()
 
 
+@router.get("/{id}")
+def read_job(session: SessionDep, id: uuid.UUID) -> Any:
+    """
+    Retrieve job.
+    """
+
+    rhub = RHub(session)
+    shub = SHub(rhub)
+
+    rsite = RSite(session)
+    ssite = SSite(rsite)
+
+    svehicle = SVehicle(shub, ssite)
+    frame_bytes = svehicle.read_job(id)
+    return StreamingResponse(
+        frame_bytes, media_type="multipart/x-mixed-replace; boundary=frame"
+    )
+
+
 @router.post(
     "/{id}",
     dependencies=[Depends(get_current_active_superuser)],
 )
-def create_job(session: SessionDep, id: uuid.UUID, verbose: int = 0) -> Any:
+def create_job(
+    session: SessionDep, id: uuid.UUID, is_stream: int = 0, verbose: int = 0
+) -> Any:
     """
     Create a new job.
     """
@@ -40,7 +62,7 @@ def create_job(session: SessionDep, id: uuid.UUID, verbose: int = 0) -> Any:
     ssite = SSite(rsite)
 
     svehicle = SVehicle(shub, ssite)
-    return svehicle.create_job(id, verbose)
+    return svehicle.create_job(id, is_stream, verbose)
 
 
 @router.delete("/{id}", dependencies=[Depends(get_current_active_superuser)])

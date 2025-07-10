@@ -1,10 +1,25 @@
 import os
+import queue
 import uuid
 
 from app.core.config import settings
 from app.features.vehicle.job import JOBS, Job
 from app.models import Message
 from app.services import SHub, SSite
+
+
+def frame_generator(job: Job):
+    while job.buffer.running.is_set():
+        try:
+            frame_bytes = job.buffer.queue.get(timeout=1)
+        except queue.Empty:
+            continue
+        if frame_bytes is None:
+            continue
+
+        yield (
+            b"--frame\r\n" b"Content-Type: image/jpeg\r\n\r\n" + frame_bytes + b"\r\n"
+        )
 
 
 class SVehicle:
@@ -15,7 +30,15 @@ class SVehicle:
     def read_jobs(self) -> list[str]:
         return list(JOBS.keys())
 
-    def create_job(self, id: uuid.UUID, verbose=0) -> Message:
+    def read_job(self, id: uuid.UUID):
+        # TODO: add read job service
+        site = self.ssite.read_site(id)
+        job = JOBS.get(site.id)
+        if not job:
+            return Message(message="Job not found.")
+        return frame_generator(job)
+
+    def create_job(self, id: uuid.UUID, is_stream=0, verbose=0) -> Message:
         try:
             hub = self.shub.read_hub_by_name("main")
             site = self.ssite.read_site(id)
@@ -28,6 +51,7 @@ class SVehicle:
                 url_stream=url,
                 path_model=model,
                 region_config=region_config,
+                is_stream=is_stream,
                 verbose=verbose,
             )
             job.start()
@@ -42,5 +66,5 @@ class SVehicle:
         job = JOBS.get(site.id)
         if not job:
             return Message(message="Job not found.")
-        job.stop()
+        job.stop(id)
         return Message(message="Job deleted successfully")
