@@ -159,6 +159,10 @@ class Predictor:
                         self.state_streaming.queue.put(frame_bytes, timeout=1)
                     except queue.Full:
                         logger.warning("⚠️ Queue full, dropping frame..")
+                        try:
+                            self.state_streaming.queue.get_nowait()
+                        except queue.Empty:
+                            pass
 
     def commit_item(
         self,
