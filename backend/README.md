@@ -84,10 +84,12 @@
 - [x] 🔨 Comment tasks for main server
 - [x] ♻️ Use `__call__` magic method instead off `process` method
 - [x] 🚚 Rename state and buffer into state counting and state streaming
+- [x] ✨ Add fps in site input to mirror the site fps
+- [x] 🐛 Make date created as created in the system and date stamped as created in the track
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Complete the line in and line out feature by adding line in
-- [x] ✨ Add fps in site input to mirror the site fps
+- [ ] ✨ Add ROI visualization in streaming view
 - [ ] ⚡️ Use `gstreamer` instead of OpenCV default streamer
 - [ ] 👷 Auto-update edge server by git
 

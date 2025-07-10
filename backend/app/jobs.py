@@ -65,7 +65,6 @@ async def send_item() -> None:
             }
             for item in items:
                 data = {
-                    "date_created": str(item.date_created),
                     "date_stamped": str(item.date_stamped),
                     "id_track": item.id_track,
                     "id_cls": item.id_cls,
