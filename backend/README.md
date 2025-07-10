@@ -89,9 +89,9 @@
 - [x] ✨ Drop a frame when queue is full
 - [x] ✏️ Resolve state counting typo
 - [x] ✨ Add api to get site sample
+- [x] 💄 Change line out colour to pastel purple
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
-- [ ] ✨ Complete the line in and line out feature by adding line in
 - [ ] ✨ Add ROI visualization in streaming view
 - [ ] ⚡️ Use `gstreamer` instead of OpenCV default streamer
 - [ ] 👷 Auto-update edge server by git

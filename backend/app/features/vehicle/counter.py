@@ -125,7 +125,7 @@ class Counter(ObjectCounter):
         )  # Initialize annotator
 
         self.annotator.draw_region(
-            reg_pts=self.region, color=(104, 0, 123), thickness=self.line_width * 2
+            reg_pts=self.region, color=(208, 0, 104), thickness=self.line_width * 2
         )  # Draw region
 
         # Iterate over bounding boxes, track ids and classes index
