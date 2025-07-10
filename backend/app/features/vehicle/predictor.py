@@ -9,6 +9,7 @@ import time
 from datetime import datetime
 
 import cv2 as cv
+import humanize
 import numpy as np
 from ultralytics import checks as ultralytics_checks
 
@@ -18,6 +19,7 @@ from app.repositories.r_user import RUser
 from app.schemas import ItemCreate
 from app.services.s_item import SItem
 from app.services.s_user import SUser
+from app.utils import utcnow
 
 from .counter import Counter as ObjectCounter
 from .state import State
@@ -55,6 +57,9 @@ class Predictor:
         self.is_stream = is_stream
         self.verbose = verbose
 
+        self.tic = utcnow()
+        self.im1: np.ndarray | None = None
+
         if self.verbose:
             logger.info(ultralytics_checks())
 
@@ -73,6 +78,38 @@ class Predictor:
                 (104, 31, 17),
                 (255, 255, 255),
                 self.counter.margin,
+            )
+
+    def put_text(
+        self,
+        text: str,
+        coordinates: tuple,
+        color=(255, 255, 255),
+        outline=(0, 0, 0),
+        thickness=3,
+        scale=2,
+    ):
+        cv.putText(
+            self.im1, text, coordinates, 0, 1, outline, thickness * scale, cv.LINE_AA
+        )
+        cv.putText(self.im1, text, coordinates, 0, 1, color, thickness, cv.LINE_AA)
+
+    def draw_roi(self, color=(255, 255, 255)):
+        polygon = np.array(self.original_region_config[0])
+        cv.polylines(
+            self.im1,
+            [polygon],
+            isClosed=True,
+            color=color,
+            thickness=self.counter.line_width * 2,
+        )
+        for point in polygon:
+            cv.circle(
+                self.im1,
+                (point[0], point[1]),
+                self.counter.line_width * 4,
+                color,
+                -1,
             )
 
     def run(self):
@@ -135,37 +172,29 @@ class Predictor:
                     self.x_max,
                     self.y_max,
                 )
+                self.im1 = im1
 
                 # draw ROI
-                polygon = np.array(self.original_region_config[0])
-                cv.polylines(
-                    im1,
-                    [polygon],
-                    isClosed=True,
-                    color=(255, 160, 210),
-                    thickness=self.counter.line_width * 2,
-                )
-                for point in polygon:
-                    cv.circle(
-                        im1,
-                        (point[0], point[1]),
-                        self.counter.line_width * 4,
-                        (255, 160, 210),
-                        -1,
-                    )
+                self.draw_roi((255, 85, 170))
 
                 # add fps
                 curr_time = time.time()
                 fps = 1 / (curr_time - prev_time)
                 prev_time = curr_time
-                cv.putText(
-                    im1,
-                    f"FPS: {fps:.0f}",
-                    (50, 50),
-                    cv.FONT_HERSHEY_SIMPLEX,
-                    1,
-                    (0, 255, 0),
-                    3,
+                self.put_text(f"FPS: {fps:.0f}", (50, 50), (255, 85, 170))
+
+                # add tic
+                self.put_text(
+                    f"Start Time : {self.tic.replace(microsecond=0)}",
+                    (50, im1.shape[0] - 100),
+                    (255, 85, 170),
+                )
+
+                # add duration
+                duration = utcnow() - self.tic
+                duration = humanize.precisedelta(duration)
+                self.put_text(
+                    f"Duration   : {duration}", (50, im1.shape[0] - 50), (255, 85, 170)
                 )
 
                 # add counts
