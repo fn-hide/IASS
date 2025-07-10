@@ -37,6 +37,7 @@ class Predictor:
         line_in: np.ndarray,
         line_out: np.ndarray,
         polygon: np.ndarray,
+        original_region_config: tuple,
         is_counter=True,
         is_stream=True,
         verbose=0,
@@ -49,6 +50,7 @@ class Predictor:
         self.line_in = line_in
         self.line_out = line_out
         self.polygon = polygon
+        self.original_region_config = original_region_config
         self.is_counter = is_counter
         self.is_stream = is_stream
         self.verbose = verbose
@@ -133,6 +135,24 @@ class Predictor:
                     self.x_max,
                     self.y_max,
                 )
+
+                # draw ROI
+                polygon = np.array(self.original_region_config[0])
+                cv.polylines(
+                    im1,
+                    [polygon],
+                    isClosed=True,
+                    color=(255, 160, 210),
+                    thickness=self.counter.line_width * 2,
+                )
+                for point in polygon:
+                    cv.circle(
+                        im1,
+                        (point[0], point[1]),
+                        self.counter.line_width * 4,
+                        (255, 160, 210),
+                        -1,
+                    )
 
                 # add fps
                 curr_time = time.time()

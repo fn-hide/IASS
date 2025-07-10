@@ -90,6 +90,7 @@
 - [x] ✏️ Resolve state counting typo
 - [x] ✨ Add api to get site sample
 - [x] 💄 Change line out colour to pastel purple
+- [x] 💄 Add ROI visualization
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view

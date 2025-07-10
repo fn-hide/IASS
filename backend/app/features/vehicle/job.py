@@ -59,6 +59,7 @@ class Job:
             line_in,
             line_out,
             polygon,
+            self.region_config,
             is_stream=self.is_stream,
             verbose=self.verbose,
         )
