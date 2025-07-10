@@ -80,11 +80,11 @@
 - [x] 🧵 Fix database engine creation
 - [x] ✨ Add api for streaming
 - [x] 🐛 Fix count label is still showing in streaming
-- [ ] Refactor run app with fastapi to uvicorn
-- [ ] Comment tasks for main server
-- [ ] ♻️ Use `__call__` magic method instead off `process` method
-- [ ] ✨ Create scallable class to benchmark object counter with mask and save the speed
-- [ ] ⚡️ Use `gstreamer` instead of
+- [x] 🏗️ Use uvicorn instead of fastapi to run backend
+- [x] 🔨 Comment tasks for main server
+- [ ] 🏗️ Make difference branch for site and production use
+- [x] ♻️ Use `__call__` magic method instead off `process` method
+- [ ] ⚡️ Use `gstreamer` instead of OpenCV default streamer
 - [ ] 👷 Auto-update edge server by git
 
 ## Requirements
