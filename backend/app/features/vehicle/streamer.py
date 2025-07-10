@@ -12,12 +12,12 @@ logger = logging.getLogger(__name__)
 class Streamer:
     def __init__(
         self,
-        state: State,
+        state_streaming: State,
         url: str,
         buffer=3,
         fps=20,
     ):
-        self.state = state
+        self.state_streaming = state_streaming
         self.url = url
         self.buffer = buffer
         self.fps = fps
@@ -31,11 +31,11 @@ class Streamer:
         self.cap.set(cv.CAP_PROP_FPS, self.fps)
         if not self.cap.isOpened():
             logger.error("❌ Error: Couldn't open RTSP stream")
-            self.state.running.clear()
+            self.state_streaming.running.clear()
             return
 
         i_frame = 0
-        while self.state.running.is_set():
+        while self.state_streaming.running.is_set():
             i_frame += 1
             if i_frame % 2 == 0:
                 # logger.info("▶️ Reading frame..")
@@ -44,11 +44,11 @@ class Streamer:
                     logger.warning(
                         "⚠️ Video frame is empty or video processing has been successfully completed."
                     )
-                    self.state.running.clear()
+                    self.state_streaming.running.clear()
                     break
 
                 try:
-                    self.state.queue.put(frame, timeout=1)
+                    self.state_streaming.queue.put(frame, timeout=1)
                 except queue.Full:
                     logger.warning("⚠️ Queue full, dropping frame..")
             else:

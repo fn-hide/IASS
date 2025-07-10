@@ -18,12 +18,13 @@ class Job:
         self.url_stream = url_stream
         self.path_model = path_model
         self.region_config = region_config
-        self.thread_streamer = None
-        self.thread_counter = None
         self.is_stream = is_stream
         self.verbose = verbose
-        self.state = State()
-        self.buffer = State()
+
+        self.thread_streamer = None
+        self.thread_counter = None
+        self.state_counting = State()
+        self.state_streaming = State()
 
     def start(self):
         (x_min, y_min, x_max, y_max), polygon, line_in, line_out = adjust_site_region(
@@ -40,10 +41,10 @@ class Job:
             line_width=2,
         )
 
-        streamer = Streamer(self.state, self.url_stream, 1, 20)
+        streamer = Streamer(self.state_counting, self.url_stream, 1, 20)
         predictor = Predictor(
-            self.state,
-            self.buffer,
+            self.state_counting,
+            self.state_streaming,
             counter,
             (x_min, y_min, x_max, y_max),
             line_in,
@@ -62,8 +63,8 @@ class Job:
         print(f"💨 Stream started for {self.url_stream}")
 
     def stop(self, id: uuid.UUID):
-        self.state.running.clear()
-        self.buffer.running.clear()
+        self.state_counting.running.clear()
+        self.state_streaming.running.clear()
         self.thread_streamer.join()
         self.thread_counter.join()
         del JOBS[id]

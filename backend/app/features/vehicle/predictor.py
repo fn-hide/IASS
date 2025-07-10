@@ -30,8 +30,8 @@ logger = logging.getLogger(__name__)
 class Predictor:
     def __init__(
         self,
-        state: State,
-        buffer: State,
+        state_counting: State,
+        state_streaming: State,
         counter: ObjectCounter,
         border_xy: tuple[int, int, int, int],
         line_in: np.ndarray,
@@ -41,8 +41,8 @@ class Predictor:
         is_stream=True,
         verbose=0,
     ):
-        self.state = state
-        self.buffer = buffer
+        self.state_counting = state_counting
+        self.state_streaming = state_streaming
         self.counter = counter
         self.border_xy = border_xy
         self.x_min, self.y_min, self.x_max, self.y_max = border_xy
@@ -76,9 +76,9 @@ class Predictor:
     def run(self):
         # fps
         prev_time = time.time()
-        while self.state.running.is_set():
+        while self.state_counting.running.is_set():
             try:
-                frame = self.state.queue.get(timeout=1)
+                frame = self.state_counting.queue.get(timeout=1)
             except queue.Empty:
                 continue
             if frame is None:
@@ -156,7 +156,7 @@ class Predictor:
                     try:
                         _, buffer = cv.imencode(".jpg", frame)
                         frame_bytes = buffer.tobytes()
-                        self.buffer.queue.put(frame_bytes, timeout=1)
+                        self.state_streaming.queue.put(frame_bytes, timeout=1)
                     except queue.Full:
                         logger.warning("⚠️ Queue full, dropping frame..")
 
