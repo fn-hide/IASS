@@ -1,5 +1,6 @@
 import uuid
 
+import cv2 as cv
 from fastapi import HTTPException
 
 from app.models import Message, Site
@@ -21,6 +22,17 @@ class SSite:
         if not obj:
             raise HTTPException(status_code=404, detail="Site not found")
         return obj
+
+    def read_site_sample(self, id: uuid.UUID) -> Site:
+        obj = self.read_site(id)
+        url = f"rtsp://{obj.username}:{obj.password}@{obj.host}:{obj.port}"
+        cap = cv.VideoCapture(url)
+        ret, frame = cap.read()
+        if not ret:
+            return Message(message="Failed to get sample of the CCTV site.")
+        cap.release()
+        _, buffer = cv.imencode(".jpg", frame)
+        return buffer
 
     def create_site(self, site_in: SiteCreate, user_id: uuid.UUID) -> Site:
         obj = Site.model_validate(site_in, update={"owner_id": user_id})

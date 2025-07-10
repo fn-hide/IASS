@@ -2,6 +2,7 @@ import uuid
 from typing import Any
 
 from fastapi import APIRouter, Depends
+from fastapi.responses import Response
 
 from app.api.deps import CurrentUser, SessionDep, get_current_active_superuser
 from app.models import Message
@@ -30,6 +31,19 @@ def read_sites(session: SessionDep, skip: int = 0, limit: int = 100) -> Any:
     repository = RSite(session=session)
     service = SSite(repository=repository)
     return service.read_sites(skip=skip, limit=limit)
+
+
+@router.get("/{id}/sample")
+def read_site_sample(session: SessionDep, id: uuid.UUID) -> Any:
+    """
+    Get site sample by ID.
+    """
+
+    repository = RSite(session=session)
+    service = SSite(repository=repository)
+    buffer = service.read_site_sample(id=id)
+    frame_bytes = buffer.tobytes()
+    return Response(content=frame_bytes, media_type="image/jpeg")
 
 
 @router.get(
