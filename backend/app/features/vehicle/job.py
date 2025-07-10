@@ -13,11 +13,20 @@ from .streamer import Streamer
 
 class Job:
     def __init__(
-        self, url_stream: str, path_model: str, region_config, is_stream=0, verbose=0
+        self,
+        url_stream: str,
+        path_model: str,
+        region_config: tuple,
+        fps=20,
+        buffer=1,
+        is_stream=0,
+        verbose=0,
     ):
         self.url_stream = url_stream
         self.path_model = path_model
         self.region_config = region_config
+        self.fps = fps
+        self.buffer = buffer
         self.is_stream = is_stream
         self.verbose = verbose
 
@@ -41,7 +50,7 @@ class Job:
             line_width=2,
         )
 
-        streamer = Streamer(self.state_counting, self.url_stream, 1, 20)
+        streamer = Streamer(self.state_counting, self.url_stream, self.fps, self.buffer)
         predictor = Predictor(
             self.state_counting,
             self.state_streaming,

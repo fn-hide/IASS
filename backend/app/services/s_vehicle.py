@@ -9,9 +9,9 @@ from app.services import SHub, SSite
 
 
 def frame_generator(job: Job):
-    while job.buffer.running.is_set():
+    while job.state_streaming.running.is_set():
         try:
-            frame_bytes = job.buffer.queue.get(timeout=1)
+            frame_bytes = job.state_streaming.queue.get(timeout=1)
         except queue.Empty:
             continue
         if frame_bytes is None:
@@ -38,7 +38,9 @@ class SVehicle:
             return Message(message="Job not found.")
         return frame_generator(job)
 
-    def create_job(self, id: uuid.UUID, is_stream=0, verbose=0) -> Message:
+    def create_job(
+        self, id: uuid.UUID, fps=20, buffer=1, is_stream=0, verbose=0
+    ) -> Message:
         try:
             hub = self.shub.read_hub_by_name("main")
             site = self.ssite.read_site(id)
@@ -51,6 +53,8 @@ class SVehicle:
                 url_stream=url,
                 path_model=model,
                 region_config=region_config,
+                fps=fps,
+                buffer=buffer,
                 is_stream=is_stream,
                 verbose=verbose,
             )

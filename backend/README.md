@@ -87,7 +87,7 @@
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Complete the line in and line out feature by adding line in
-- [ ] ✨ Add fps in site input to mirror the site fps
+- [x] ✨ Add fps in site input to mirror the site fps
 - [ ] ⚡️ Use `gstreamer` instead of OpenCV default streamer
 - [ ] 👷 Auto-update edge server by git
 

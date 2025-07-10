@@ -14,8 +14,8 @@ class Streamer:
         self,
         state_streaming: State,
         url: str,
-        buffer=3,
-        fps=20,
+        fps: int,
+        buffer: int,
     ):
         self.state_streaming = state_streaming
         self.url = url

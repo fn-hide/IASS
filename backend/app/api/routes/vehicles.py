@@ -49,7 +49,12 @@ def read_job(session: SessionDep, id: uuid.UUID) -> Any:
     dependencies=[Depends(get_current_active_superuser)],
 )
 def create_job(
-    session: SessionDep, id: uuid.UUID, is_stream: int = 0, verbose: int = 0
+    session: SessionDep,
+    id: uuid.UUID,
+    fps: int = 20,
+    buffer: int = 1,
+    is_stream: int = 0,
+    verbose: int = 0,
 ) -> Any:
     """
     Create a new job.
@@ -62,7 +67,7 @@ def create_job(
     ssite = SSite(rsite)
 
     svehicle = SVehicle(shub, ssite)
-    return svehicle.create_job(id, is_stream, verbose)
+    return svehicle.create_job(id, fps, buffer, is_stream, verbose)
 
 
 @router.delete("/{id}", dependencies=[Depends(get_current_active_superuser)])
