@@ -92,6 +92,7 @@
 - [x] 💄 Change line out colour to pastel purple
 - [x] 💄 Add ROI visualization
 - [x] 💄 Add start time and duration
+- [x] ➕ Add humanize
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view

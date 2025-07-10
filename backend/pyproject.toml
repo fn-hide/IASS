@@ -28,6 +28,7 @@ dependencies = [
     "ultralytics>=8.3.74",
     "clip @ git+https://github.com/ultralytics/CLIP.git",
     "openvino>=2024.0.0",
+    "humanize>=4.12.3",
 ]
 
 [dependency-groups]
