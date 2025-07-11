@@ -26,9 +26,10 @@ def parse_cors(v: Any) -> list[str] | str:
 
 
 class Settings(BaseSettings):
+    env_name = "hub" if os.getenv("TASK").lower() == "hub" else "site"
     model_config = SettingsConfigDict(
         # Use top level .env file (one level above ./backend/)
-        env_file="../.env",
+        env_file=f"../{env_name}.env",
         env_ignore_empty=True,
         extra="ignore",
     )
