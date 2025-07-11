@@ -114,14 +114,6 @@ Now that you have Traefik in place you can deploy your FastAPI project with Dock
 
 You need to set some environment variables first.
 
-Set the `TASK`, by default is null or not set yet then use `SITE`, otherwise use `HUB`:
-
-```bash
-export TASK=HUB
-```
-
-It will decide to use which environment variable defined in the `.env` files. `TASK` environment variable define the task of the backend as a hub or a site. When the backend as a hub, it will ignore all the site tasks like send item into hub, prune item, and etc.
-
 Set the `ENVIRONMENT`, by default `local` (for development), but when deploying to a server you would put something like `staging` or `production`:
 
 ```bash

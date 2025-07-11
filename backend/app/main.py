@@ -33,5 +33,4 @@ if settings.all_cors_origins:
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
 # add background tasks (only used on edge backend)
-if settings.env_name == "site":
-    from app import tasks  # noqa: F401, E402
+# from app import tasks  # noqa: F401, E402
