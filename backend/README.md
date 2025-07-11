@@ -93,6 +93,7 @@
 - [x] 💄 Add ROI visualization
 - [x] 💄 Add start time and duration
 - [x] ➕ Add humanize
+- [x] 🔧 Update hub host into server 66
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view
