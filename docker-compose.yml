@@ -12,7 +12,7 @@ services:
     volumes:
       - app-db-data:/var/lib/postgresql/data/pgdata
     env_file:
-      - site.env
+      - ${TASK?Variable not set}.env
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD?Variable not set}
@@ -32,7 +32,7 @@ services:
         restart: true
     command: bash scripts/prestart.sh
     env_file:
-      - site.env
+      - ${TASK?Variable not set}.env
     environment:
       - DOMAIN=${DOMAIN}
       - FRONTEND_HOST=${FRONTEND_HOST?Variable not set}
@@ -65,7 +65,7 @@ services:
       prestart:
         condition: service_completed_successfully
     env_file:
-      - site.env
+      - ${TASK?Variable not set}.env
     environment:
       - DOMAIN=${DOMAIN}
       - FRONTEND_HOST=${FRONTEND_HOST?Variable not set}
