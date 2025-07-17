@@ -12,7 +12,7 @@ class RegionBase(BaseModel):
 
 # Properties to receive on item creation
 class RegionCreate(RegionBase):
-    pass
+    site_id: uuid.UUID
 
 
 # Properties to receive on item update
