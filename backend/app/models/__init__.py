@@ -12,17 +12,19 @@ from .main import (
     Token,
     TokenPayload,
 )
+from .region import Region
 from .site import Site
 from .user import User
 
 __all__ = [
     "BaseModel",
     "SQLModel",
+    "Hub",
     "Item",
     "Message",
     "Token",
     "TokenPayload",
-    "User",
+    "Region",
     "Site",
-    "Hub",
+    "User",
 ]

@@ -6,6 +6,7 @@ from sqlmodel import Field, Relationship
 from app.schemas.site import SiteBase
 
 if TYPE_CHECKING:
+    from app.models.region import Region
     from app.models.user import User
 
 
@@ -16,3 +17,4 @@ class Site(SiteBase, table=True):
         foreign_key="user.id", nullable=False, ondelete="CASCADE"
     )
     owner: "User" = Relationship(back_populates="sites")
+    regions: list["Region"] = Relationship(back_populates="site", cascade_delete=True)
