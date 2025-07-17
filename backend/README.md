@@ -95,11 +95,13 @@
 - [x] ➕ Add humanize
 - [x] 🔧 Update hub host into server 66
 - [x] 🔧 Refactor assets directory and update dockerfile
+- [x] ➕ Add debian dependencies for ffmpeg
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view
 - [ ] ⚡️ Use `gstreamer` instead of OpenCV default streamer
 - [ ] 👷 Auto-update edge server by git
+- [ ] ✨ Add one-to-many process between streaming and predicting
 
 ## Requirements
 
