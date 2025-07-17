@@ -96,6 +96,7 @@
 - [x] 🔧 Update hub host into server 66
 - [x] 🔧 Refactor assets directory and update dockerfile
 - [x] ➕ Add debian dependencies for ffmpeg
+- [x] 🏗️ Split dependencies for CUDA and OpenVINO
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view
