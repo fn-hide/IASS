@@ -3,6 +3,7 @@ import uuid
 from sqlmodel import Field
 
 from app.models.base import BaseModel
+from app.schemas import RegionsPublic
 
 
 # Shared properties
@@ -47,3 +48,12 @@ class SitePublic(SiteBase):
 class SitesPublic(BaseModel):
     data: list[SitePublic]
     count: int
+
+
+class SiteRegionsPublic(SiteBase):
+    id: uuid.UUID
+    owner_id: uuid.UUID
+    regions: RegionsPublic
+
+    class Config:
+        orm_mode = True

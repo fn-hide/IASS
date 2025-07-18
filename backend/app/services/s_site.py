@@ -5,7 +5,7 @@ from fastapi import HTTPException
 
 from app.models import Message, Site
 from app.repositories import RSite
-from app.schemas import SiteCreate, SitesPublic, SiteUpdate
+from app.schemas import SiteCreate, SiteRegionsPublic, SitesPublic, SiteUpdate
 
 
 class SSite:
@@ -19,6 +19,12 @@ class SSite:
 
     def read_site(self, id: uuid.UUID) -> Site:
         obj = self.repository.get(id)
+        if not obj:
+            raise HTTPException(status_code=404, detail="Site not found")
+        return obj
+
+    def read_site_with_regions(self, id: uuid.UUID) -> SiteRegionsPublic:
+        obj = self.repository.get_site_with_regions(id)
         if not obj:
             raise HTTPException(status_code=404, detail="Site not found")
         return obj

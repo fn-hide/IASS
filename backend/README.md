@@ -101,6 +101,7 @@
 - [x] 🐛 Add missing site id when create a new region
 - [x] ✨ Add region api
 - [x] ⚡️ Refactor queue into normal variable and only save one frame give more clean frame
+- [x] ✨ Add an api to get site with regions
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view

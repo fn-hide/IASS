@@ -22,7 +22,7 @@ from .site import (
     SiteBase,
     SiteCreate,
     SitePublic,
-    SitesPublic,
+    SiteRegionsPublic,
     SiteUpdate,
 )
 from .user import (
@@ -56,7 +56,7 @@ __all__ = [
     "SiteCreate",
     "SiteUpdate",
     "SitePublic",
-    "SitesPublic",
+    "SiteRegionsPublic",
     "NewPassword",
     "UpdatePassword",
     "UserBase",

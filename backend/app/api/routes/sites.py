@@ -10,6 +10,7 @@ from app.repositories import RSite
 from app.schemas import (
     SiteCreate,
     SitePublic,
+    SiteRegionsPublic,
     SitesPublic,
     SiteUpdate,
 )
@@ -59,6 +60,21 @@ def read_site(session: SessionDep, id: uuid.UUID) -> Any:
     repository = RSite(session=session)
     service = SSite(repository=repository)
     return service.read_site(id=id)
+
+
+@router.get(
+    "/{id}/regions",
+    dependencies=[Depends(get_current_active_superuser)],
+    response_model=SiteRegionsPublic,
+)
+def read_site_with_regions(session: SessionDep, id: uuid.UUID) -> Any:
+    """
+    Get site with regions by ID.
+    """
+
+    repository = RSite(session)
+    service = SSite(repository)
+    return service.read_site_with_regions(id)
 
 
 @router.post(

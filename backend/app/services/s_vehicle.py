@@ -35,11 +35,17 @@ class SVehicle:
         return frame_generator(job)
 
     def create_job(
-        self, id: uuid.UUID, fps=20, buffer=1, is_stream=0, verbose=0
+        self,
+        id_site: uuid.UUID,
+        id_region: uuid.UUID | None = None,
+        fps=20,
+        buffer=1,
+        is_stream=0,
+        verbose=0,
     ) -> Message:
         try:
             hub = self.shub.read_hub_by_name("main")
-            site = self.ssite.read_site(id)
+            site = self.ssite.read_site(id_site)
 
             url = f"rtsp://{site.username}:{site.password}@{site.host}:{site.port}"
             model = os.path.join(settings.DIR_ASSETS, hub.model)
