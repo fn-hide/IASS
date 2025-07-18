@@ -1,5 +1,4 @@
 import logging
-import queue
 
 import cv2 as cv
 
@@ -47,14 +46,7 @@ class Streamer:
                     self.state_counting.running.clear()
                     break
 
-                try:
-                    self.state_counting.queue.put(frame, timeout=1)
-                except queue.Full:
-                    logger.warning("⚠️ Queue full, dropping frame..")
-                    try:
-                        self.state_counting.queue.get_nowait()
-                    except queue.Empty:
-                        pass
+                self.state_counting.frame = frame.copy()
             else:
                 # logger.info("⏯️ Skipping frame..")
                 self.cap.grab()

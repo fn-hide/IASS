@@ -100,6 +100,7 @@
 - [x] 🗃️ Add region table for site extension
 - [x] 🐛 Add missing site id when create a new region
 - [x] ✨ Add region api
+- [x] ⚡️ Refactor queue into normal variable and only save one frame give more clean frame
 - [ ] 🏗️ Make difference branch for site and production use
 - [ ] ✨ Add more information for job's object in api response
 - [ ] ✨ Add ROI visualization in streaming view

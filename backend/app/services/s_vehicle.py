@@ -1,5 +1,4 @@
 import os
-import queue
 import uuid
 
 from app.core.config import settings
@@ -10,10 +9,7 @@ from app.services import SHub, SSite
 
 def frame_generator(job: Job):
     while job.state_streaming.running.is_set():
-        try:
-            frame_bytes = job.state_streaming.queue.get(timeout=1)
-        except queue.Empty:
-            continue
+        frame_bytes = job.state_streaming.frame
         if frame_bytes is None:
             continue
 

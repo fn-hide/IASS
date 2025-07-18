@@ -1,9 +1,8 @@
-import queue
 import threading
 
 
 class State:
-    def __init__(self, maxsize=100):
-        self.queue = queue.Queue(maxsize=maxsize)
+    def __init__(self):
+        self.frame = None
         self.running = threading.Event()
         self.running.set()

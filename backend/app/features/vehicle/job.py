@@ -33,7 +33,7 @@ class Job:
         self.thread_streamer = None
         self.thread_counter = None
         self.state_counting = State()
-        self.state_streaming = State(maxsize=3)
+        self.state_streaming = State()
 
     def start(self):
         (x_min, y_min, x_max, y_max), polygon, line_in, line_out = adjust_site_region(

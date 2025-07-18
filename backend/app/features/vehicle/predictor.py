@@ -4,7 +4,6 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.getcwd(), "development")))
 
 import logging
-import queue
 import time
 from datetime import datetime
 
@@ -116,12 +115,9 @@ class Predictor:
         # fps
         prev_time = time.time()
         while self.state_counting.running.is_set():
-            try:
-                frame = self.state_counting.queue.get(timeout=1)
-            except queue.Empty:
+            if self.state_counting.frame is None:
                 continue
-            if frame is None:
-                continue
+            frame = self.state_counting.frame.copy()
             im1 = frame.copy()
 
             if self.is_counter:
@@ -202,16 +198,9 @@ class Predictor:
 
                 # save frame as bytes for streaming
                 if self.is_stream:
-                    try:
-                        _, buffer = cv.imencode(".jpg", frame)
-                        frame_bytes = buffer.tobytes()
-                        self.state_streaming.queue.put(frame_bytes, timeout=1)
-                    except queue.Full:
-                        logger.warning("⚠️ Queue full, dropping frame..")
-                        try:
-                            self.state_streaming.queue.get_nowait()
-                        except queue.Empty:
-                            pass
+                    _, buffer = cv.imencode(".jpg", frame)
+                    frame_bytes = buffer.tobytes()
+                    self.state_streaming.frame = frame_bytes
 
     def commit_item(
         self,
