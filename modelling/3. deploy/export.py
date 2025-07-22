@@ -30,5 +30,5 @@ if __name__ == "__main__":
     #     nms=True,
     # )
 
-    model = YOLO("./asset/result/data_yolo11m_100/detect/train/weights/best.pt")
-    model.export(format="tflite")
+    model = YOLO("./asset/result/yolo11n_100_best_2107.pt")
+    model.export(format="engine")
