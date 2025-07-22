@@ -104,6 +104,7 @@
 - [x] ✨ Add an api to get site with regions
 - [x] 📌 Pin to TensorRT dependency
 - [x] 📦️ Export into TensorRT format
+- [x] 📌 Pin to OpenVINO dependency
 - [ ] ✨ Remove site data initialization on IASS Hub
 - [ ] ✨ Add api to periodically update site and other data (like user) on IASS Edge to Hub
 - [ ] 🏗️ Make difference branch for site and production use
