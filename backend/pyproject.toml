@@ -17,35 +17,30 @@ dependencies = [
     "httpx<1.0.0,>=0.25.1",
     "psycopg[binary]<4.0.0,>=3.1.13",
     "sqlmodel<1.0.0,>=0.0.21",
-
     # Pin bcrypt until passlib supports the latest
     "bcrypt==4.3.0",
-
     "pydantic-settings<3.0.0,>=2.2.1",
     "sentry-sdk[fastapi]<2.0.0,>=1.40.6",
     "pyjwt<3.0.0,>=2.8.0",
     "fastapi-utils[all]>=0.8.0",
-
     # OpenVINO dependencies
-    "numpy>=2.0.0,<=2.2.6",
-    "openvino>=2025.0.0",
+    # "numpy>=2.0.0,<=2.2.6",
+    # "openvino>=2025.0.0",
     # "opencv-python>=4.12.0.88",
-
-    # Headless option
-    "opencv-python-headless>=4.12.0.88",
-
+    # # Headless option
+    # "opencv-python-headless>=4.12.0.88",
     # CUDA dependencies. Don't forget to uninstall it first before moving back to OpenVINO dependencies
-    # "opencv-python>=4.11.0.86",
-    # "numpy==1.26.4",
-    # "markupsafe==3.0.2",
-    # "torchvision>=0.22.1",
-    # "torchaudio>=2.7.1",
-    # "torch>=2.6.0",
-    # "onnxruntime-gpu==1.18.0",
-
+    "opencv-python>=4.11.0.86",
+    "numpy==1.26.4",
+    "markupsafe==3.0.2",
+    "torchvision>=0.22.1",
+    "torchaudio>=2.7.1",
+    "torch>=2.6.0",
+    "onnxruntime-gpu==1.18.0",
     "ultralytics>=8.3.74",
     "clip @ git+https://github.com/ultralytics/CLIP.git",
     "humanize>=4.12.3",
+    "tensorrt>=10.12.0.36",
 ]
 
 [dependency-groups]
@@ -70,15 +65,15 @@ dev = [
 ]
 
 # CUDA dependencies
-# [tool.uv.sources]
-# torch = { index = "pytorch" }
-# torchvision = { index = "pytorch" }
-# torchaudio = { index = "pytorch" }
+[tool.uv.sources]
+torch = { index = "pytorch" }
+torchvision = { index = "pytorch" }
+torchaudio = { index = "pytorch" }
 
-# [[tool.uv.index]]
-# name = "pytorch"
-# url = "https://download.pytorch.org/whl/cu118"
-# explicit = true
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cu118"
+explicit = true
 
 [tool.mypy]
 strict = true
